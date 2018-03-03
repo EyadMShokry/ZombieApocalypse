@@ -17,9 +17,6 @@ public class FlashlightScript : MonoBehaviour {
 	public bool isOn;
 	// timer that automatically decreases the battery level.
 	public float timer;
-	// Charging bars tracker flag
-	public int charging_bars_tracker;
-	public GameObject[] charging_bars;
 	void Start()
 	{
 		// Catching the component which is in the children of this.
@@ -29,13 +26,7 @@ public class FlashlightScript : MonoBehaviour {
 		// Battery level initialized with 15.
 		batLevel = 15;
 		minusBat();
-		isOn = false;
-		charging_bars_tracker = 0;
-		charging_bars = new GameObject[5];
-		for (int i = 0; i < 5; i++) {
-			charging_bars [i] = GameObject.Find ("Cube " + "(" + (i+1) + ")");
-
-		}
+		isOn = true;
 	}
 
 	void minusBat()
@@ -44,7 +35,6 @@ public class FlashlightScript : MonoBehaviour {
 		{
 			batLevel -= 1;
 			FLight.intensity -= 1;
-			charging_bars_tracker += 1;
 		}
 	}
 
