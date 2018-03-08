@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ce15eff0f718b7b42a9b65ecf1254ce9
+timeCreated: 18446744011573954816
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - anim: {instanceID: 0}
+  - fire: {fileID: 7400000, guid: 71c430a232f539b459e35ecc7cc7001d, type: 3}
+  - reload: {fileID: 7400000, guid: a4dbfbd2851f33e46acca78fce91389f, type: 3}
+  - draw: {fileID: 7400000, guid: bfb4cd7d20f86f443b2cc461b1143d8c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
