@@ -1,0 +1,21 @@
+newmtl ButtonRed
+Kd 1 0.5220588 0.5220588
+illum 2
+
+newmtl Metal01
+Kd 1 1 1
+map_Kd C:\Unity3D Projects\ThunderWire - Tutorials - Unity5\ExportedObj\metal_D.png
+map_Bump C:\Unity3D Projects\ThunderWire - Tutorials - Unity5\ExportedObj\metal_N.png
+illum 2
+
+newmtl Metal02
+Kd 1 1 1
+map_Kd C:\Unity3D Projects\ThunderWire - Tutorials - Unity5\ExportedObj\brushed_metal_D.png
+map_Bump C:\Unity3D Projects\ThunderWire - Tutorials - Unity5\ExportedObj\brushed_metal_N.png
+illum 2
+
+newmtl GroundStone
+Kd 1 1 1
+map_Kd C:\Unity3D Projects\ThunderWire - Tutorials - Unity5\ExportedObj\stone_0104_c.png
+illum 2
+
