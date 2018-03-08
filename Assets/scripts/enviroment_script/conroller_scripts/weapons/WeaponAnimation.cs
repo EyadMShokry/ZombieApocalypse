@@ -19,12 +19,19 @@ public class WeaponAnimation : MonoBehaviour
     }
 
     // Update is called once per frame
+	IEnumerator Wait()
+	{
+		print(Time.time);
+		yield return new WaitForSeconds(1);
+		print(Time.time);
+	}
     void Update()
     {
 		if (Input.GetKeyDown(reloadKey) && !anim.IsPlaying(fire.name)&&!anim.IsPlaying(draw.name))
         {
             if (reload != null) anim.Play(reload.name);
         }
+
 		else if (Input.GetMouseButton(0) && !anim.IsPlaying(reload.name)&&!anim.IsPlaying(draw.name))
         {
             if (fire != null) anim.Play(fire.name);
