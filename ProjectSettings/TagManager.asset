@@ -6,6 +6,7 @@ TagManager:
   tags:
   - pick up
   - Enemy
+  - cartoons
   layers:
   - Default
   - TransparentFX
