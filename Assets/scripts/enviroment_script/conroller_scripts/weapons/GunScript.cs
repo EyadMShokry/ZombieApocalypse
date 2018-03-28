@@ -16,17 +16,10 @@ public class GunScript : MonoBehaviour {
 	// camera controller -> fps
 	public Camera fpscam;
 	// muzlle flash -> lightning on weapon fire
-	//public ParticleSystem muzzleFlash;
-
-	// audio source -> pistol audio
-	private AudioSource pistolSound;
+	public ParticleSystem muzzleFlash;
 
 	// bullet impact effect
 	public GameObject impactEffect;
-
-	void Start(){
-		pistolSound = GetComponent<AudioSource> ();
-	}
 
 	void Update (){
 		if(Input.GetButton("Fire1") && Time.time >= nextTimeToFire){
@@ -38,14 +31,12 @@ public class GunScript : MonoBehaviour {
 
 	void Shoot(){
 		// play muzzle flash
-		//muzzleFlash.Play ();
+		muzzleFlash.Play ();
 		// like a collider object -> to check if something (target) is hit
 		RaycastHit hit;
 		// bullet coordinates
 		Ray ray = new Ray (fpscam.transform.position, fpscam.transform.forward);
 		if(Physics.Raycast(ray, out hit, range)){
-			// play pistol sound clip
-			pistolSound.Play ();
 			if (hit.collider.CompareTag ("Enemy")) {
 				Enemy enemy = hit.collider.GetComponent<Enemy> ();
 				enemy.TakeDamage (damage);
