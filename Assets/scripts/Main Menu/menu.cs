@@ -8,6 +8,7 @@ public class menu : MonoBehaviour {
 
     public Canvas quitMenu;
     //public Canvas startMenu;
+	public Button options;
     public Button startText;
     public Button quitText;
 
@@ -17,6 +18,7 @@ public class menu : MonoBehaviour {
     {
         quitMenu = quitMenu.GetComponent<Canvas>();
         //startMenu = startMenu.GetComponent<Canvas>();
+		options = options.GetComponent<Button>();
         startText = startText.GetComponent<Button>();
         quitText = quitText.GetComponent<Button>();
         quitMenu.enabled = false;
@@ -35,6 +37,10 @@ public class menu : MonoBehaviour {
         startText.enabled = true;
         quitText.enabled = true;
     }
+
+	public void Go_option_menu(){
+		SceneManager.LoadScene("OptionMenu");
+	}
 
     public void StartGame()
     {
