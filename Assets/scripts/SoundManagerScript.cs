@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-	public static AudioClip flashLightSwitchOnSound, flashLightSwitchOffSound, boxBreakingٍSound, characterDeathSound, characterHurtSound,
+	public static AudioClip flashLightSwitchOnSound, flashLightSwitchOffSound, boxBreakingSound, characterDeathSound, characterHurtSound,
 	characterHeavyBreathingSound, characterScaredBreathingSound, m4MultiShotsSound, m4OneShotSound, m4ReloadSound, m9ShotSound, m9ReloadChangeMagazineSound,
 	machineGunReloadSound, machineGunShotSound, weaponsSwitchingSound, startingMusicSound, gameMusic1Sound, bigZombieAttackSound, bigZombieBreathingSound,
 	bigZombieDeathSound, zombieGirlAttackSound, zombieGirlBreathingSound, zombieGirlDeathSound, zombiePoliceAttackSound, zombiePoliceBreathingSound,
@@ -75,7 +75,7 @@ public class SoundManagerScript : MonoBehaviour
 			audioSrc.PlayOneShot (flashLightSwitchOffSound);
 			break;
 		case "boxBreaking":
-			audioSrc.PlayOneShot (boxBreakingٍSound);
+			audioSrc.PlayOneShot (boxBreakingSound);
 			break;
 		case "characterDeath":
 			audioSrc.PlayOneShot (characterDeathSound);
