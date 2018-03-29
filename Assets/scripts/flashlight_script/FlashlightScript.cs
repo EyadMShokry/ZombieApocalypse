@@ -10,21 +10,28 @@ public class FlashlightScript : MonoBehaviour {
 	public float c;
 	public float d;
 	// Battery Integer Level.
-	public int batLevel;
+	public float startBatLevel;
+	// Battery current state level
+	public float currentBatLevel;
 	// Spotlight Object.
 	public Light FLight;
 	// Boolean variable to describe the flashlight state.
 	public bool isOn;
 	// timer that automatically decreases the battery level.
 	public float timer;
+	[Header("Flashlight Energy Bar")]
+	public Image energyBar;
 	void Start()
 	{
 		// Catching the component which is in the children of this.
 		FLight = GetComponentInChildren<Light> ();
 		// Defining the light as spot.
 		FLight.type = LightType.Spot;
-		// Battery level initialized with 15.
-		batLevel = 15;
+		// Battery level initialized with the value set in difficulty control script.
+		startBatLevel = DifficulityControlScript.StartBatteryLevelAmount;
+		energyBar = GameObject.Find ("ScreenCanvas/HealthAndEnergyBars/EnergyBar").GetComponent<Image>();
+		currentBatLevel = startBatLevel;
+		energyBar.fillAmount = currentBatLevel / startBatLevel;
 		minusBat();
 		isOn = true;
 	}
@@ -33,8 +40,12 @@ public class FlashlightScript : MonoBehaviour {
 	{
 		if (isOn)
 		{
-			batLevel -= 1;
-			FLight.intensity -= 1;
+			if (currentBatLevel > 0.00f) {
+				currentBatLevel -= DifficulityControlScript.DegradingBatteryLevelAmount;
+				FLight.intensity -= DifficulityControlScript.DegradingIntensityAmount;
+				// Adjusting energy bar fill amount.
+				energyBar.fillAmount = currentBatLevel / startBatLevel;
+			}
 		}
 	}
 
@@ -51,7 +62,7 @@ public class FlashlightScript : MonoBehaviour {
 
 		if (timer <= 0)
 		{
-			timer = 5;
+			timer = DifficulityControlScript.DegradeAfterTime;
 			minusBat();
 		}
 
@@ -73,9 +84,8 @@ public class FlashlightScript : MonoBehaviour {
 
 		}
 
-		if(batLevel == 0)
+		if(currentBatLevel == 0)
 		{
-			batLevel = 0;
 			FLight.enabled = false;
 			isOn = false;
 		}
