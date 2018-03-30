@@ -12,6 +12,8 @@ TagManager:
   - Ammo9m
   - healthKits
   - damageKits
+  - healthSmall
+  - healthMid
   layers:
   - Default
   - TransparentFX

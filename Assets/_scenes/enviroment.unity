@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5450,6 +5450,81 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198469446457516582, guid: 3c94ed1b1e55af346833d8a838f24873,
         type: 2}
@@ -19738,8 +19813,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922e9d5fcdac5a540ace757ec2d6e670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 400000, guid: 52cf2a42de425c04dbad2326efa3be14, type: 2}
-  Ammo: {fileID: 400000, guid: b47b4cddd05440744a98c2e507be3b46, type: 2}
+  health:
+  - {fileID: 400000, guid: 52cf2a42de425c04dbad2326efa3be14, type: 2}
+  - {fileID: 4990126193558216, guid: 03fa5073cdb1e5d49bc3ce5e1f31c657, type: 2}
+  - {fileID: 4970613569322474, guid: e9399dbd64d9139428c058f4e8312d5d, type: 2}
+  Ammo:
+  - {fileID: 400000, guid: b47b4cddd05440744a98c2e507be3b46, type: 2}
+  - {fileID: 400000, guid: b47b4cddd05440744a98c2e507be3b46, type: 2}
   number_of_health_comp: 10
   number_of_Ammo_comp: 10
 --- !u!4 &942263210

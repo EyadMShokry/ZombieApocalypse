@@ -44,19 +44,21 @@ public class HospitalDistributedController : MonoBehaviour {
 		new Vector3(5.9f,0.032f,33.6f),
 		new Vector3(23.9f,0.032f,33.6f)
 	};
-	public Transform health;
-	public Transform Ammo;
+	public Transform[] health;
+	public Transform[] Ammo;
 	public int number_of_health_comp=10;
 	public int number_of_Ammo_comp=10;
 	// Use this for initialization
 	void Start () {
 		List<int> randomHealthList = new List<int> ();
 		int MyNumber = 0;
+		int type = 0;
 		for (int i = 0; i < number_of_health_comp; i++) {
 			MyNumber = Random.Range (0, postion_health.Length);
 			if (!randomHealthList.Contains (MyNumber)) {
 				randomHealthList.Add (MyNumber);
-				Instantiate (health, postion_health [MyNumber], Quaternion.identity);
+				type = Random.Range (0, health.Length);
+				Instantiate (health[type], postion_health [MyNumber], Quaternion.identity);
 			} else {
 				i--;
 			}
@@ -66,7 +68,8 @@ public class HospitalDistributedController : MonoBehaviour {
 			MyNumber = Random.Range (0, postion_Ammo.Length);
 			if (!randomAmmoList.Contains (MyNumber)) {
 				randomAmmoList.Add (MyNumber);
-				Instantiate (Ammo, postion_Ammo [MyNumber], Quaternion.identity);
+				type = Random.Range (0, Ammo.Length);
+				Instantiate (Ammo[type], postion_Ammo [MyNumber], Quaternion.identity);
 			} else {
 				i--;
 			}
