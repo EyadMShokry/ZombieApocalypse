@@ -638,9 +638,9 @@ PlayerSettings:
   cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 6454a6de-85f1-4a1f-b2db-eed2bfd82c1a
+  cloudProjectId: 70fc6bd0-f7ca-48c9-9824-c8205dfc6280
   projectName: enviroment
-  organizationId: salmadoma
+  organizationId: sheko00o
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

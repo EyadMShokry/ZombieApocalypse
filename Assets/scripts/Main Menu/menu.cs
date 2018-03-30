@@ -19,7 +19,6 @@ public class menu : MonoBehaviour {
         startText = startText.GetComponent<Button>();
         quitText = quitText.GetComponent<Button>();
         quitMenu.enabled = false;
-        options = options.GetComponent<Button>();
     }
 
     public void ExitPress()
