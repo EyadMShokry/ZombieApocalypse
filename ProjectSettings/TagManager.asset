@@ -10,6 +10,8 @@ TagManager:
   - Ammo
   - healthLarge
   - Ammo9m
+  - healthKits
+  - damageKits
   layers:
   - Default
   - TransparentFX
