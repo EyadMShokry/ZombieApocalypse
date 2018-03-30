@@ -7,6 +7,9 @@ TagManager:
   - pick up
   - Enemy
   - cartoons
+  - Ammo
+  - healthLarge
+  - Ammo9m
   layers:
   - Default
   - TransparentFX
