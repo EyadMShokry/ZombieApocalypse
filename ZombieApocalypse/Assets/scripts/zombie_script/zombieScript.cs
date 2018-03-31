@@ -12,9 +12,20 @@ public class zombieScript : MonoBehaviour
 	private FirstPersonController m_Player;
 	static Animator anim;
 	private bool health = true;
+
+	public GameObject Zombie;
+	
+	private float PlaceX;
+	
+	private float PlaceZ;
+
 	// Use this for initialization
 	void Start ()
 	{
+		PlaceX = Random.Range (-26 ,26 ); // should change according to values of the room
+		PlaceZ = Random.Range (-12 ,12 ); // should change according to values of the room
+		Zombie.transform.position = new Vector3 (PlaceX, 0, PlaceZ);
+		
 		anim = GetComponent<Animator> ();	
 		t_Player = GameObject.Find ("Player").transform;
 		m_Player = GameObject.FindObjectOfType<FirstPersonController>();

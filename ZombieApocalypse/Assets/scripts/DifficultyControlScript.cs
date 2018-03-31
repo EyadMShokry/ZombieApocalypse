@@ -16,8 +16,24 @@ public class DifficulityControlScript : MonoBehaviour
 	private static float degradingBatteryLevelAmount = 1.00f;
 	// time in seconds.
 	private static float degradeAfterTime = 5.00f;
+	private static float zombieSpeed = 0.05f; // Zombie speed 
+	
+	public static float ZombieSpeed {
 
+		get {
 
+			return zombieSpeed;
+
+		}
+
+		set {
+
+			zombieSpeed = value;
+
+		}
+
+	}
+	
 	// Camera shaking methods
 	public static float CameraShakingPower {
 		get {
