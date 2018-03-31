@@ -69,7 +69,19 @@ public class HospitalDistributedController : MonoBehaviour {
 			if (!randomAmmoList.Contains (MyNumber)) {
 				randomAmmoList.Add (MyNumber);
 				type = Random.Range (0, Ammo.Length);
-				Instantiate (Ammo[type], postion_Ammo [MyNumber], Quaternion.identity);
+				if (type == 1) {
+					Vector3 temp = new Vector3 ();
+					temp.x = postion_Ammo [MyNumber].x;
+					temp.y = 0.1f;
+					temp.z = postion_Ammo [MyNumber].x;
+					Quaternion newQuaternion = new Quaternion();
+					newQuaternion.Set (-1f, 0f, 0f, 1);
+					Instantiate (Ammo[type], temp, newQuaternion);
+				} else {
+					Instantiate (Ammo[type], postion_Ammo [MyNumber], Quaternion.identity);
+				}
+
+
 			} else {
 				i--;
 			}

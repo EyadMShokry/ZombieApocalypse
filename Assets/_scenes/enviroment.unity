@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -19567,7 +19567,7 @@ MonoBehaviour:
   - {fileID: 4970613569322474, guid: e9399dbd64d9139428c058f4e8312d5d, type: 2}
   Ammo:
   - {fileID: 400000, guid: b47b4cddd05440744a98c2e507be3b46, type: 2}
-  - {fileID: 400000, guid: b47b4cddd05440744a98c2e507be3b46, type: 2}
+  - {fileID: 4966821379662040, guid: 81129094c3f80864d93b96e143d0fb1b, type: 2}
   number_of_health_comp: 10
   number_of_Ammo_comp: 10
 --- !u!4 &942263210

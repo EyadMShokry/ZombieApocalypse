@@ -94,23 +94,28 @@ public class PlayerHealthScript : MonoBehaviour
             healthBar.UpdateBar(currentHealth, maxHealth);
         }
 
-        void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("healthLarge"))
-            {
-                other.gameObject.SetActive(false);
-                HealPlayer(70);
-            }
-        else if (other.gameObject.CompareTag("healthKits"))
-        {
-            other.gameObject.SetActive(false);
-            HealPlayer(20);
-        }
-        else if(other.gameObject.CompareTag("damageKits"))
-            {
-                other.gameObject.SetActive(false);
-                TakeDamage(90);
-            }
-    }
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("healthLarge"))
+		{
+			other.gameObject.SetActive(false);
+			HealPlayer(70);
+		}
+		else if (other.gameObject.CompareTag("healthMid"))
+		{
+			other.gameObject.SetActive(false);
+			HealPlayer(50);
+		}
+		else if (other.gameObject.CompareTag("healthSmall"))
+		{
+			other.gameObject.SetActive(false);
+			HealPlayer(20);
+		}
+		else if(other.gameObject.CompareTag("damageKits"))
+		{
+			other.gameObject.SetActive(false);
+			TakeDamage(90);
+		}
+	}
 
 }
