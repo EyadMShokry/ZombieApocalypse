@@ -15,6 +15,8 @@ public class menu : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+		SoundManagerScript.PlaySound ("startingMusic");
+
         quitMenu = quitMenu.GetComponent<Canvas>();
         startText = startText.GetComponent<Button>();
         quitText = quitText.GetComponent<Button>();

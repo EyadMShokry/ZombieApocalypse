@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class SoundManagerScript : MonoBehaviour
 {
@@ -14,52 +15,52 @@ public class SoundManagerScript : MonoBehaviour
 	void Start ()
 	{
 		//flash light sounds
-		flashLightSwitchOnSound = Resources.Load<AudioClip> ("sounds/torch_sound/large_flashlight_switched_on");
-		flashLightSwitchOffSound = Resources.Load<AudioClip> ("sounds/torch_sound/large_flashlight_switched_off");
+		flashLightSwitchOnSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "torch_sound" + Path.DirectorySeparatorChar + "large_flashlight_switched_on");
+		flashLightSwitchOffSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "torch_sound" + Path.DirectorySeparatorChar + "large_flashlight_switched_off");
 
 		//box breaking sounds
-		boxBreakingSound = Resources.Load<AudioClip> ("sounds/box_breaking/box_breaking");
+		boxBreakingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "box_breaking" + Path.DirectorySeparatorChar + "box_breaking");
 
 		//character sounds
-		characterDeathSound = Resources.Load<AudioClip> ("sounds/character/death");
-		characterHurtSound = Resources.Load<AudioClip> ("sounds/character/hurt");
-		characterHeavyBreathingSound = Resources.Load<AudioClip> ("sounds/character/heavy_breathing");
-		characterScaredBreathingSound = Resources.Load<AudioClip> ("sounds/character/scared_breathing");
+		characterDeathSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "character" + Path.DirectorySeparatorChar + "death");
+		characterHurtSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "character" + Path.DirectorySeparatorChar + "hurt");
+		characterHeavyBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "character" + Path.DirectorySeparatorChar + "heavy_breathing");
+		characterScaredBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "character" + Path.DirectorySeparatorChar + "scared_breathing");
 
 	//Weapons sounds:
 		//m4 sounds
-		m4MultiShotsSound = Resources.Load<AudioClip> ("sounds/weapons/m4/multi_shots");
-		m4OneShotSound = Resources.Load<AudioClip> ("sounds/weapons/m4/one_shot");
-		m4ReloadSound = Resources.Load<AudioClip> ("sounds/weapons/m4/reload");
+		m4MultiShotsSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m4" + Path.DirectorySeparatorChar + "multi_shots");
+		m4OneShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m4" + Path.DirectorySeparatorChar + "one_shot");
+		m4ReloadSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m4" + Path.DirectorySeparatorChar + "reload");
 		//m9 pistol sounds
-		m9ShotSound = Resources.Load<AudioClip> ("sounds/weapons/m9_pistol/shot");
-		m9ReloadChangeMagazineSound = Resources.Load<AudioClip> ("sounds/weapons/m9_pistol/reload_change_magazine");
+		m9ShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m9_pistol" + Path.DirectorySeparatorChar + "shot");
+		m9ReloadChangeMagazineSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m9_pistol" + Path.DirectorySeparatorChar + "reload_change_magazine");
 		//machine gun sounds
-		machineGunReloadSound = Resources.Load<AudioClip> ("sounds/weapons/machine_gun/reload");
-		machineGunShotSound = Resources.Load<AudioClip> ("sounds/weapons/machine_gun/shot");
-		weaponsSwitchingSound = Resources.Load<AudioClip> ("sounds/weapons/weapons_switching");
+		machineGunReloadSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "machine_gun" + Path.DirectorySeparatorChar + "reload");
+		machineGunShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "machine_gun" + Path.DirectorySeparatorChar + "shot");
+		weaponsSwitchingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "weapons_switching");
 
 		//background sounds
-		startingMusicSound = Resources.Load<AudioClip> ("sounds/background/starting_music");
-		gameMusic1Sound = Resources.Load<AudioClip> ("sounds/background/game_music_1");
+		startingMusicSound = Resources.Load<AudioClip> ("");
+		gameMusic1Sound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar + "game_music_1");
 
 	//Zombies sounds:
 		//big zombie sounds
-		bigZombieAttackSound = Resources.Load<AudioClip> ("sounds/zombies/big_zombie/attack");
-		bigZombieBreathingSound = Resources.Load<AudioClip> ("sounds/zombies/big_zombie/breathing");
-		bigZombieDeathSound = Resources.Load<AudioClip> ("sounds/zombies/big_zombie/death");
+		bigZombieAttackSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "big_zombie" + Path.DirectorySeparatorChar + "attack");
+		bigZombieBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "big_zombie" + Path.DirectorySeparatorChar + "breathing");
+		bigZombieDeathSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "big_zombie" + Path.DirectorySeparatorChar + "death");
 		//zombie girl sounds
-		zombieGirlAttackSound = Resources.Load<AudioClip> ("sounds/zombies/zombie_girl/attack");
-		zombieGirlBreathingSound = Resources.Load<AudioClip> ("sounds/zombies/zombie_girl/breathing");
-		zombieGirlDeathSound = Resources.Load<AudioClip> ("sounds/zombies/zombie_girl/death");
+		zombieGirlAttackSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_girl" + Path.DirectorySeparatorChar + "attack");
+		zombieGirlBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_girl" + Path.DirectorySeparatorChar + "breathing");
+		zombieGirlDeathSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_girl" + Path.DirectorySeparatorChar + "death");
 		//zombie police sounds
-		zombiePoliceAttackSound = Resources.Load<AudioClip> ("sounds/zombies/zombie_police/attack");
-		zombiePoliceBreathingSound = Resources.Load<AudioClip> ("sounds/zombies/zombie_police/breathing");
-		zombiePoliceDeathSound = Resources.Load<AudioClip> ("sounds/zombies/zombie_police/death");
+		zombiePoliceAttackSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "attack");
+		zombiePoliceBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "breathing");
+		zombiePoliceDeathSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "death");
 		audioSrc = GetComponent<AudioSource> (); 
 	}
 
-	// Update is called once per frame
+	//Update is called once per frame
 	void Update ()
 	{
 
