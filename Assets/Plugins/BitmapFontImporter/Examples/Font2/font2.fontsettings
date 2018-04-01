@@ -1245,7 +1245,6 @@ Font:
   m_FontNames: []
   m_FallbackFonts: []
   m_FontRenderingMode: 0
-  m_UseLegacyBoundsCalculation: 0
 --- !u!21 &21859711591984836
 Material:
   serializedVersion: 6
