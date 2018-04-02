@@ -14,13 +14,20 @@ public class zombieScript : MonoBehaviour
 	private bool health = true;
 
 	public GameObject Zombie;
+	//private GameObject []TheZombeies;
 	private float PlaceX;
 	private float PlaceZ;
+
+	//sounds
+	public string DeathSound;
+	public string IdleSound;
+	public string AttackSound;
 
 
 	// Use this for initialization
 	void Start ()
 	{
+		//TheZombeies = new GameObject ();
 		anim = GetComponent<Animator> ();	
 		t_Player = GameObject.Find ("Player").transform;
 		m_Player = GameObject.FindObjectOfType<FirstPersonController>();
@@ -29,7 +36,7 @@ public class zombieScript : MonoBehaviour
 			PlaceZ = Random.Range (-26, 12); // should change according to values of the room
 			Zombie.transform.position = new Vector3 (PlaceX, 0, PlaceZ);
 
-			//Instantiate (Zombie,  new Vector3 (PlaceX, 0, PlaceZ), Quaternion.identity);
+		//	TheZombeies[i]=Instantiate (Zombie,  new Vector3 (PlaceX, 0, PlaceZ), Quaternion.identity);
 		//}
 		
 
@@ -40,13 +47,14 @@ public class zombieScript : MonoBehaviour
 	{
 		if (!health) {
 			anim.SetBool ("isDie", true);
+			SoundManagerScript.PlaySound(DeathSound);
 		}
 			
 		Vector3 direction = t_Player.position - Zombie.transform.position;
 		float angle = Vector3.Angle (direction, this.transform.forward);
 
 		direction.y = 0;
-		if (direction.magnitude < 15 && angle>=30) {
+		if (direction.magnitude < DifficulityControlScript.DistanceMagnitute && DifficulityControlScript.SeeAngle<=30) {
 			Zombie.transform.rotation = Quaternion.Slerp 
 				(Zombie.transform.rotation, Quaternion.LookRotation (direction), 0.1f);
 
@@ -59,6 +67,7 @@ public class zombieScript : MonoBehaviour
 				if (direction.magnitude < 2) {	
 					anim.SetBool ("isWalking", false);
 					anim.SetBool ("isAttacking", true);
+					SoundManagerScript.PlaySound(AttackSound);
 					m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
 						DifficulityControlScript.CameraShakingPower, /*Slow down amount*/DifficulityControlScript.CameraShakingSlowDownAmount);
 				}
@@ -75,6 +84,7 @@ public class zombieScript : MonoBehaviour
 			anim.SetBool("isBiting", false);
 			anim.SetBool ("isWalking", false);
 			anim.SetBool("isIdle",true);
+			SoundManagerScript.PlaySound(IdleSound);
 		}	}
 
 	void OnTriggerEnter(Collider other)
