@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
 public class m4_machinegun : MonoBehaviour {
 	// damage
 	public float damage = 10f;
@@ -78,6 +80,7 @@ public class m4_machinegun : MonoBehaviour {
 		// Displaying Weapon Image
 		WeaponImage.texture = Resources.Load("Weapon_images/M4") as Texture;
 
+
 		isReloading = false;
 	}
 
@@ -106,6 +109,7 @@ public class m4_machinegun : MonoBehaviour {
 	void Shoot(){
 		if(currentMagazineAmmo > 0) {
 			WeaponAnimationScript.anim.Play (WeaponAnimationScript.fire.name);
+			SoundManagerScript.PlaySound ("m4OneShot");
 			// Decrease Ammo count
 			currentMagazineAmmo--;
 			// Displaying current ammo count
@@ -134,6 +138,7 @@ public class m4_machinegun : MonoBehaviour {
 		isReloading = true;
 		Debug.Log ("Reloading...");
 		WeaponAnimationScript.anim.Play(WeaponAnimationScript.reload.name);
+		SoundManagerScript.PlaySound ("m4Reload");
 		yield return new WaitForSeconds(reloadTime);
 		int AmmoToReload = maxMagazineSize - currentMagazineAmmo;
 		if (AmmoToReload > maxOwnedAmmo) {

@@ -87,6 +87,7 @@ public class PlayerHealthScript : MonoBehaviour
 
 			if (currentHealth <= 10 && currentHealth != 0)
 			{
+				SoundManagerScript.PlaySound ("characterHurt");
 				SoundManagerScript.PlaySound ("characterHeavyBreathing");
 			}
 			if (currentHealth == 0)
