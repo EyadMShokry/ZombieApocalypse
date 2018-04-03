@@ -19,6 +19,7 @@ public class OptionMenu : MonoBehaviour {
 
 	public void text_update(float value)
 	    {
+		
 	       Precentage_text.text = Mathf.RoundToInt(value * 100) + "%";
 	    }
 }
