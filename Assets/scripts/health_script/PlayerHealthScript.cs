@@ -76,22 +76,43 @@ public class PlayerHealthScript : MonoBehaviour
 
         public void TakeDamage(int damage)
         {
-            if (currentHealth > 0)
-            {
-                currentHealth -= damage;
-            }
 
-            else
-            {
+		if (currentHealth > 0)
+   {
+      currentHealth -= damage;
+			if (currentHealth > 10)
+			{
+				SoundManagerScript.PlaySound ("characterHurt");
+			}
+
+			if (currentHealth <= 10 && currentHealth != 0)
+			{
+				SoundManagerScript.PlaySound ("characterHeavyBreathing");
+			}
+			if (currentHealth == 0)
+			{
+				SoundManagerScript.PlaySound ("characterDeath");
+			}
+
+
+	}
+	
+
+
+    else
+    {
                 // Set the current health to zero.
                 currentHealth = 0;
 
+
                 // Run the Death function since the player has died.
                 //Death();
-            }
+    }
+    
 
             // Update the Health and Shield status bars.
             healthBar.UpdateBar(currentHealth, maxHealth);
+
         }
 
 	void OnTriggerEnter(Collider other)
@@ -114,7 +135,7 @@ public class PlayerHealthScript : MonoBehaviour
 		else if(other.gameObject.CompareTag("damageKits"))
 		{
 			other.gameObject.SetActive(false);
-			TakeDamage(90);
+			TakeDamage(10);
 		}
 	}
 
