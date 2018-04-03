@@ -14,6 +14,8 @@ TagManager:
   - damageKits
   - healthSmall
   - healthMid
+  - zombieGirl
+  - zombiePolice
   layers:
   - Default
   - TransparentFX
