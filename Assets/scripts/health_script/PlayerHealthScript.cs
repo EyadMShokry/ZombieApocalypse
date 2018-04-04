@@ -54,13 +54,20 @@ public class PlayerHealthScript : MonoBehaviour
             currentHealth -= damage;
             if (currentHealth > 10)
             {
-                SoundManagerScript.PlaySound("characterHurt");
+				if (!SoundManagerScript.audioSrc.isPlaying)
+				{
+
+					SoundManagerScript.PlaySound ("characterHurt");
+				}
             }
 
             if (currentHealth <= 10 && currentHealth != 0)
             {
-                SoundManagerScript.PlaySound("characterHurt");
-                SoundManagerScript.PlaySound("characterHeavyBreathing");
+				if (!SoundManagerScript.audioSrc.isPlaying) 
+				{
+					SoundManagerScript.PlaySound ("characterHurt");
+					SoundManagerScript.PlaySound ("characterHeavyBreathing");
+				}
             }
             if (currentHealth == 0)
             {
@@ -86,16 +93,19 @@ public class PlayerHealthScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("healthLarge"))
         {
+			SoundManagerScript.PlaySound ("PickingUp");
             other.gameObject.SetActive(false);
             HealPlayer(70);
         }
         if (other.gameObject.CompareTag("healthMid"))
         {
+			SoundManagerScript.PlaySound ("PickingUp");
             other.gameObject.SetActive(false);
             HealPlayer(50);
         }
         if (other.gameObject.CompareTag("healthSmall"))
         {
+			SoundManagerScript.PlaySound ("PickingUp");
             other.gameObject.SetActive(false);
             HealPlayer(20);
         }

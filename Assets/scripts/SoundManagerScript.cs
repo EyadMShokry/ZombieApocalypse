@@ -7,10 +7,10 @@ public class SoundManagerScript : MonoBehaviour
 {
 	public static AudioClip flashLightSwitchOnSound, flashLightSwitchOffSound, boxBreakingSound, characterDeathSound, characterHurtSound,
 	characterHeavyBreathingSound, characterScaredBreathingSound, m4MultiShotsSound, m4OneShotSound, m4ReloadSound, m9ShotSound, m9ReloadChangeMagazineSound,
-	machineGunReloadSound, machineGunShotSound, weaponsSwitchingSound, startingMusicSound, gameMusic1Sound, bigZombieAttackSound, bigZombieBreathingSound,
+	machineGunReloadSound, machineGunShotSound, weaponsSwitchingSound, magazineEmptySound, bulletDroppingSound, startingMusicSound, gameMusic1Sound, bigZombieAttackSound, bigZombieBreathingSound,
 	bigZombieDeathSound, zombieGirlAttackSound, zombieGirlBreathingSound, zombieGirlDeathSound, zombiePoliceAttackSound, zombiePoliceBreathingSound,
-	zombiePoliceDeathSound;
-	static AudioSource audioSrc;
+	zombiePoliceDeathSound , pickUpSound ;
+	public static AudioSource audioSrc;
 	// Use this for initialization
 	void Start ()
 	{
@@ -38,6 +38,9 @@ public class SoundManagerScript : MonoBehaviour
 		//machine gun sounds
 		machineGunReloadSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "machine_gun" + Path.DirectorySeparatorChar + "reload");
 		machineGunShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "machine_gun" + Path.DirectorySeparatorChar + "shot");
+		//general sounds for weapons
+		magazineEmptySound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "magazine_empty");
+		bulletDroppingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "bullet_dropping");
 		weaponsSwitchingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "weapons_switching");
 
 		//background sounds
@@ -57,6 +60,8 @@ public class SoundManagerScript : MonoBehaviour
 		zombiePoliceAttackSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "attack");
 		zombiePoliceBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "breathing");
 		zombiePoliceDeathSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "death");
+		//Pick up kits sounds
+		pickUpSound =  Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "kits" + Path.DirectorySeparatorChar + "pickup_kit");
 		audioSrc = GetComponent<AudioSource> (); 
 	}
 
@@ -114,6 +119,12 @@ public class SoundManagerScript : MonoBehaviour
 		case "weaponsSwitching":
 			audioSrc.PlayOneShot (weaponsSwitchingSound);
 			break;
+		case "magazineEmpty":
+			audioSrc.PlayOneShot (magazineEmptySound);
+			break;
+		case "bulletDropping":
+			audioSrc.PlayOneShot (bulletDroppingSound);
+			break;
 		case "startingMusic":
 			audioSrc.PlayOneShot (startingMusicSound);
 			break;
@@ -146,6 +157,9 @@ public class SoundManagerScript : MonoBehaviour
 			break;
 		case "zombiePoliceDeath":
 			audioSrc.PlayOneShot (zombiePoliceDeathSound);
+			break;
+		case "PickingUp":
+			audioSrc.PlayOneShot (pickUpSound);
 			break;
 		
 		}
