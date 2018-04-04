@@ -38,8 +38,11 @@ public class zombieScript : MonoBehaviour
 			if (direction.magnitude < 2) {	
 				anim.SetBool ("isWalking", false);
 				anim.SetBool ("isAttacking", true);
-				m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
-					DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
+				//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
+					//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
+
+				// TODO
+				// Above function was disabled due to unrealistic behavior (disabled by andrewnagyeb)
 			}
 		} 
 		if (anim.GetBool ("isAttacking") == true || anim.GetBool("isBiting") == true) {
