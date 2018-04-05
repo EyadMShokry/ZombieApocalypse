@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerHealthScript : MonoBehaviour
 {
     static PlayerHealthScript instance;
     public static PlayerHealthScript Instance { get { return instance; } }
-    //bool canTakeDamage = true;
-
     public int maxHealth = 100;
     float currentHealth = 100;
     public SimpleHealthBarScript healthBar;
-    //public SimpleHealthBar shieldBar;
-
+	public Animation anim;
+	public AnimationClip die;
+	private bool Isdie = false;
+    
     void Awake()
     {
         // If the instance variable is already assigned, then there are multiple player health scripts in the scene. Inform the user.
@@ -117,11 +117,11 @@ public class PlayerHealthScript : MonoBehaviour
         }
         if (other.gameObject.CompareTag("zombieGirl"))
         {
-            TakeDamage((int)Math.Ceiling(Time.timeScale = 0.1f));
+			TakeDamage((int)Math.Ceiling(Time.deltaTime/50));
         }
         if (other.gameObject.CompareTag("zombiePolice"))
         {
-            TakeDamage((int)Math.Ceiling(Time.timeScale = 0.2f));
+			TakeDamage((int)Math.Ceiling(Time.deltaTime/70));
         }
      
 
@@ -129,7 +129,28 @@ public class PlayerHealthScript : MonoBehaviour
 
     public void Death()
     {
+		if (!Isdie) {
+			anim.Play (die.name);
+			Isdie = true;
+			UnityStandardAssets.Characters.FirstPerson.FirstPersonController.isplayerDeath = true;
+			int i = 0;
+			int j = 0;
+			foreach(Transform firstperson in transform){
+				if (i == 0) {
+					foreach(Transform weaponSwatch in firstperson){
+						if (j == 0) {
+							foreach(Transform weapon in weaponSwatch){
+								weapon.gameObject.SetActive (false);
+							}
+						}
+						j++;
+					}
 
+				}
+				i++;
+
+			}
+		}
     }
 
 }
