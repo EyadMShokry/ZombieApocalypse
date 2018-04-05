@@ -63,6 +63,7 @@ public class SoundManagerScript : MonoBehaviour
 		//Pick up kits sounds
 		pickUpSound =  Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "kits" + Path.DirectorySeparatorChar + "pickup_kit");
 		audioSrc = GetComponent<AudioSource> (); 
+		DontDestroyOnLoad (audioSrc);
 	}
 
 	//Update is called once per frame
