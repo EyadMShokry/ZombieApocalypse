@@ -81,7 +81,7 @@ public class PlayerHealthScript : MonoBehaviour
             currentHealth = 0;
 
             // Run the Death function since the player has died.
-            Death();
+			StartCoroutine(Death());
         }
 
         // Update the Health and Shield status bars.
@@ -127,12 +127,13 @@ public class PlayerHealthScript : MonoBehaviour
 
     }
 
-    public void Death()
+	public IEnumerator Death()
     {
 		if (!Isdie) {
+			UnityStandardAssets.Characters.FirstPerson.FirstPersonController.isplayerDeath = true;
 			anim.Play (die.name);
 			Isdie = true;
-			UnityStandardAssets.Characters.FirstPerson.FirstPersonController.isplayerDeath = true;
+			yield return new WaitForSeconds(3);
 			int i = 0;
 			int j = 0;
 			foreach(Transform firstperson in transform){
@@ -151,6 +152,8 @@ public class PlayerHealthScript : MonoBehaviour
 
 			}
 		}
+
     }
+
 
 }
