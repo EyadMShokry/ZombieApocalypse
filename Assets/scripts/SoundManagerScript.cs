@@ -14,6 +14,10 @@ public class SoundManagerScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		DontDestroyOnLoad (audioSrc);	
+	}
+
+	void Awake(){
 		//flash light sounds
 		flashLightSwitchOnSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "torch_sound" + Path.DirectorySeparatorChar + "large_flashlight_switched_on");
 		flashLightSwitchOffSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "torch_sound" + Path.DirectorySeparatorChar + "large_flashlight_switched_off");
@@ -27,7 +31,7 @@ public class SoundManagerScript : MonoBehaviour
 		characterHeavyBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "character" + Path.DirectorySeparatorChar + "heavy_breathing");
 		characterScaredBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "character" + Path.DirectorySeparatorChar + "scared_breathing");
 
-	//Weapons sounds:
+		//Weapons sounds:
 		//m4 sounds
 		m4MultiShotsSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m4" + Path.DirectorySeparatorChar + "multi_shots");
 		m4OneShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m4" + Path.DirectorySeparatorChar + "one_shot");
@@ -44,10 +48,10 @@ public class SoundManagerScript : MonoBehaviour
 		weaponsSwitchingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "weapons_switching");
 
 		//background sounds
-		startingMusicSound = Resources.Load<AudioClip> ("");
+		startingMusicSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar + "starting_music");
 		gameMusic1Sound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "background" + Path.DirectorySeparatorChar + "game_music_1");
 
-	//Zombies sounds:
+		//Zombies sounds:
 		//big zombie sounds
 		bigZombieAttackSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "big_zombie" + Path.DirectorySeparatorChar + "attack");
 		bigZombieBreathingSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "big_zombie" + Path.DirectorySeparatorChar + "breathing");
@@ -64,7 +68,6 @@ public class SoundManagerScript : MonoBehaviour
 		pickUpSound =  Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "kits" + Path.DirectorySeparatorChar + "pickup_kit");
 		audioSrc = GetComponent<AudioSource> (); 
 	}
-
 	//Update is called once per frame
 	void Update ()
 	{

@@ -9,7 +9,7 @@ public class zombieScript : MonoBehaviour
 
 	public Transform t_Player;
 	// Finding player
-	private FirstPersonController m_Player;
+	//private FirstPersonController m_Player; disabled until fixing the unrealistic behavior of camera shaking effect.
 	static Animator anim;
 	private bool health = true;
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class zombieScript : MonoBehaviour
 	{
 		anim = GetComponent<Animator> ();	
 		t_Player = GameObject.Find ("Player").transform;
-		m_Player = GameObject.FindObjectOfType<FirstPersonController>();
+		//m_Player = GameObject.FindObjectOfType<FirstPersonController>(); disabled until fixing the unrealistic behavior of camera shaking effect.
 	}
 	
 	// Update is called once per frame
