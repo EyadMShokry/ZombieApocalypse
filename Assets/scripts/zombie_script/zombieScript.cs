@@ -26,13 +26,6 @@ public class zombieScript : MonoBehaviour
 		anim = GetComponent<Animator> ();	
 		t_Player = GameObject.Find ("Player").transform;
 		//m_Player = GameObject.FindObjectOfType<FirstPersonController>(); disabled until fixing the unrealistic behavior of camera shaking effect.
-		//for (int i = 0; i < 3; i++) {
-		//PlaceX = Random.Range (-22, 22); // should change according to values of the room
-		//PlaceZ = Random.Range (-26, 12); // should change according to values of the room
-		//Zombie.transform.position = new Vector3 (PlaceX, 0, PlaceZ);
-
-		//Instantiate (Zombie,  new Vector3 (PlaceX, 0, PlaceZ), Quaternion.identity);
-		//}
 	}
 	
 	// Update is called once per frame
