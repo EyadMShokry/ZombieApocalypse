@@ -174,19 +174,29 @@ public class PlayerHealthScript : MonoBehaviour
 			UnityStandardAssets.Characters.FirstPerson.FirstPersonController.isplayerDeath = true;
 			anim.Play (die.name);
 			Isdie = true;
+
+			int i = 0;
+			int j = 0;
 			yield return new WaitForSeconds(3);
 			foreach(Transform firstperson in transform)
 			{
-				foreach(Transform weaponSwatch in firstperson)
-				{
-					foreach(Transform weapon in weaponSwatch)
+				if (i == 0) {
+					foreach(Transform weaponSwatch in firstperson)
 					{
-						weapon.gameObject.SetActive (false);
+						if (j == 0) {
+							foreach(Transform weapon in weaponSwatch)
+							{
+								weapon.gameObject.SetActive (false);
+							}
+							j++;
+						}
+
 					}
-					break;
+					i++;
 				}
-				break;
+
 			}
+
 
 		}
 	}
