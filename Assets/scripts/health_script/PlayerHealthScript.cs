@@ -16,21 +16,18 @@ public class PlayerHealthScript : MonoBehaviour
 	private bool Isdie = false;
 	public Transform[] health;
 	private int number_of_exists_health=0;
-	private int[] values_instanse = {
-		1,
-		2,
-		3,
-		4,
-		5,
-		6
-	};
+
 	private float[] values_distance = {
 		0.1f,
 		0.2f,
 		0.3f,
 		0.4f,
 		0.5f,
-		0.6f
+		0.6f,
+		0.1f,
+		0.2f,
+		0.3f,
+		0.4f
 	};
 	 
 	private Vector3[,] postions = { 
@@ -108,32 +105,7 @@ public class PlayerHealthScript : MonoBehaviour
 				SoundManagerScript.PlaySound("characterDeath");
 			}
 
-			//add health component
 
-			if (currentHealth < 10) 
-			{
-				number_of_exists_health = increase_instance_health (values_instanse[5],values_distance[5],number_of_exists_health);
-			} 
-			else if (currentHealth < 20) 
-			{
-				number_of_exists_health = increase_instance_health (values_instanse[4],values_distance[4],number_of_exists_health);
-			}
-			else if (currentHealth < 30) 
-			{
-				number_of_exists_health = increase_instance_health (values_instanse[3],values_distance[3],number_of_exists_health);
-			}
-			else if (currentHealth < 40) 
-			{
-				number_of_exists_health = increase_instance_health (values_instanse[2],values_distance[2],number_of_exists_health);
-			}
-			else if (currentHealth < 50) 
-			{
-				number_of_exists_health = increase_instance_health (values_instanse[1],values_distance[1],number_of_exists_health);
-			}
-			else if (currentHealth < 70) 
-			{
-				number_of_exists_health = increase_instance_health (values_instanse[0],values_distance[0],number_of_exists_health);
-			}
 		}
 
 		else
@@ -152,30 +124,27 @@ public class PlayerHealthScript : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
 	{
-		int index = getRoom(other);
+		
 		if (other.gameObject.CompareTag("healthLarge"))
 		{
 			SoundManagerScript.PlaySound ("PickingUp");
 			other.gameObject.SetActive(false);
 			HealPlayer(70);
-			room_busy.Remove (index);
-			number_of_exists_health--;
+
 		}
 		if (other.gameObject.CompareTag("healthMid"))
 		{
 			SoundManagerScript.PlaySound ("PickingUp");
 			other.gameObject.SetActive(false);
 			HealPlayer(50);
-			room_busy.Remove (index);
-			number_of_exists_health--;
+
 		}
 		if (other.gameObject.CompareTag("healthSmall"))
 		{
 			SoundManagerScript.PlaySound ("PickingUp");
 			other.gameObject.SetActive(false);
 			HealPlayer(20);
-			room_busy.Remove (index);
-			number_of_exists_health--;
+
 		}
 
 		if (other.gameObject.CompareTag("damageKits"))
@@ -229,35 +198,6 @@ public class PlayerHealthScript : MonoBehaviour
 
 
 
-	public int increase_instance_health(int number_of_instanse, float distance , int number_of_exists_instanse)
-	{
-		int number = number_of_instanse - number_of_exists_instanse;
-		if(number>0)
-		{
-			int type = 0;
-			Vector3[] postions_with_minmum_distance=get_postions(number_of_instanse,distance);
-			for (int i = 0; i < number; i++) 
-			{
-
-				type = UnityEngine.Random.Range (0, health.Length);
-				if (type == 0) {
-					Vector3 temp = new Vector3 ();
-					temp.x = postions_with_minmum_distance[i] .x;
-					temp.y = 0.1f;
-					temp.z = postions_with_minmum_distance[i] .z;
-					Instantiate (health[type], temp, Quaternion.identity);
-				} else {
-					Instantiate (health[type], postions_with_minmum_distance[i] , Quaternion.identity);
-				}
-
-			}
-		}
-		if (number_of_instanse > number_of_exists_instanse) {
-			return number_of_instanse;
-		} else {
-			return number_of_exists_instanse;
-		}
-	}
 
 
 
@@ -266,78 +206,12 @@ public class PlayerHealthScript : MonoBehaviour
 
 
 
-	private Vector3[] get_postions(int number_of_instanse,float distance)
-	{
-		Vector3 self_transform = transform.position;
-		float[,] minmum_distance = new float[15, 2];
-		Vector3[] postions_with_minmum_distance = new Vector3[number_of_instanse];
-		for (int i = 0; i < 15 ; i++) 
-		{
-			float minmum = 500f;
-			for (int j = 0; j < 4; j++) 
-			{
-
-				float dist = Vector3.Distance(postions[i,j], self_transform);
-				float Value_Distanse =Mathf.Abs(dist - distance) ;
-				if (minmum > Value_Distanse) 
-				{
-					minmum = Value_Distanse;
-				}
-			}
-			minmum_distance [i, 0] = i;
-			minmum_distance [i, 1] = minmum;
-		}
-
-		for (int i = 0; i < 14; i++) 
-		{
-			for (int j = 0; j < 14 -i; j++) 
-			{
-				if(minmum_distance[j,1]>minmum_distance[j+1,1])
-				{
-					float[] temp = new float[2];
-					temp[0]=minmum_distance [j,0];
-					temp[1]=minmum_distance [j,1];
-					minmum_distance [j,0] = minmum_distance [j + 1,0];
-					minmum_distance [j,1] = minmum_distance [j + 1,1];
-					minmum_distance [j + 1,0]=temp[0];
-					minmum_distance [j + 1,1]=temp[1];
-				}
-			}
-		}
-		int m = 0;
-		for (int i = 0; i < 15; i++) 
-		{				
-			if (!room_busy.Contains (Mathf.RoundToInt (minmum_distance [i, 0]))) {
-				postions_with_minmum_distance [m] = postions [Mathf.RoundToInt( minmum_distance [i,0]), UnityEngine.Random.Range (0, 4)];
-				room_busy.Add (Mathf.RoundToInt (minmum_distance [i, 0]));
-				m++;
-				if(m==number_of_instanse)
-				{
-					break;
-				}
-			}	
-
-		}
-			return postions_with_minmum_distance;
-	}
 
 
 
 
 
-	private int getRoom(Collider other)
-	{
-		Vector3 self_position = other.gameObject.transform.position;
-		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (postions [i, j] == self_position) {
-					return i;
-				}
-			}
-		}
-		return 0;
 
-	}
 
 
 }
