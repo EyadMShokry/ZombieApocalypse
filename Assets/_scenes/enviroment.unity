@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2057,6 +2057,8 @@ MonoBehaviour:
   fpscam: {fileID: 1619633497}
   muzzleFlash: {fileID: 1833156306}
   impactEffect: {fileID: 1247626839920090, guid: 6b71a8281fe486f4390d9562102c9a2a,
+    type: 2}
+  bloodEffect: {fileID: 1000013169864706, guid: e5a3d6da48298a0458c1990f58c27069,
     type: 2}
   maxMagazineSize: 15
   maxOwnedAmmo: 30
@@ -25064,7 +25066,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100094, guid: 344e2c6a860401546a3e358399ab40bf, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400094, guid: 344e2c6a860401546a3e358399ab40bf, type: 2}
       propertyPath: m_LocalScale.x
@@ -25130,6 +25132,8 @@ MonoBehaviour:
   fpscam: {fileID: 1619633497}
   muzzleFlash: {fileID: 1796233703}
   impactEffect: {fileID: 1247626839920090, guid: 6b71a8281fe486f4390d9562102c9a2a,
+    type: 2}
+  bloodEffect: {fileID: 1000013169864706, guid: e5a3d6da48298a0458c1990f58c27069,
     type: 2}
   maxMagazineSize: 30
   maxOwnedAmmo: 60
@@ -36040,7 +36044,7 @@ GameObject:
   - component: {fileID: 1629759585}
   m_Layer: 0
   m_Name: Zombies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

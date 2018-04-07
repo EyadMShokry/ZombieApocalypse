@@ -30,6 +30,9 @@ public class m9_pistol : MonoBehaviour {
 	// bullet impact effect
 	public GameObject impactEffect;
 
+	// blood impact effect
+	public GameObject bloodEffect;
+
 	/* Following variables are concerned with Weapons ammunition */
 
 	// The max clip size for the weapon
@@ -123,12 +126,14 @@ public class m9_pistol : MonoBehaviour {
 			// bullet coordinates
 			Ray ray = new Ray (fpscam.transform.position, fpscam.transform.forward);
 			if (Physics.Raycast (ray, out hit, range)) {
-				if (hit.collider.CompareTag ("Enemy")) {
-					Enemy enemy = hit.collider.GetComponent<Enemy> ();
-					enemy.TakeDamage (damage);
+				if (hit.collider.CompareTag ("zombieGirl") || hit.collider.CompareTag ("zombieCop") || hit.collider.CompareTag ("zombiePolice")) {
+					/*Enemy enemy = hit.collider.GetComponent<Enemy> ();
+					enemy.TakeDamage (damage);*/
 					if (hit.rigidbody != null) {
 						hit.rigidbody.AddForce (-hit.normal * impactForce);
 					}
+					GameObject bloodGO = Instantiate (bloodEffect, hit.point, Quaternion.LookRotation (hit.normal));
+					Destroy (bloodGO, 2f);
 				}
 				GameObject impactGO = Instantiate (impactEffect, hit.point, Quaternion.LookRotation (hit.normal));
 				Destroy (impactGO, 2f);
