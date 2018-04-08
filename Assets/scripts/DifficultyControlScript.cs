@@ -17,7 +17,7 @@ public class DifficulityControlScript : MonoBehaviour
 	// time in seconds.
 	private static float degradeAfterTime = 5.00f;
 
-	private static float zombieSpeed = 0.05f; // Zombie speed 
+	private static float zombieSpeed = 0.5f; // Zombie speed 
 	private static float distanceMagnitute = 15.0f; // Vector Magnitute between ZOmbie and player determine the zombie state
 	private static float seeAngle = 30.0f; // angle between zombie and player determine zombie state
 	private static int zombiesNumber = 5;
