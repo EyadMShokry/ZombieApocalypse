@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class OptionMenu : MonoBehaviour {
 	Text Precentage_text;
-    public Canvas startMenu;
-    public Canvas optionMenu;
 
 	void start(){
 		Precentage_text = GetComponent<Text>();
@@ -16,8 +14,7 @@ public class OptionMenu : MonoBehaviour {
 
 	void back_to_mainMenu()
 	    {
-        optionMenu.enabled = false;
-        startMenu.enabled = true;
+	       SceneManager.LoadScene("MainMenu");
 	    }
 
 	public void text_update(float value)

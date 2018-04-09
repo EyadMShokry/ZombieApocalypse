@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class menu : MonoBehaviour {
 
     public Canvas quitMenu;
-    public Canvas optionMenu;
-    public Canvas startMenu;
 	public Button options;
     public Button startText;
     public Button quitText;
@@ -22,7 +20,6 @@ public class menu : MonoBehaviour {
         startText = startText.GetComponent<Button>();
         quitText = quitText.GetComponent<Button>();
         quitMenu.enabled = false;
-        optionMenu.enabled = false;       
         SoundManagerScript.PlaySound("startingMusic");
     }
 
@@ -41,8 +38,7 @@ public class menu : MonoBehaviour {
     }
 
 	public void Go_option_menu(){
-        startMenu.enabled = false;
-        optionMenu.enabled = true;
+		SceneManager.LoadScene("OptionMenu");
 	}
 
     public void StartGame()
