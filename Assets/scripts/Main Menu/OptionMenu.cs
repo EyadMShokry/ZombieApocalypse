@@ -6,20 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class OptionMenu : MonoBehaviour {
 	Text Precentage_text;
+    public Canvas startMenu;
+    public Canvas optionMenu;
 
-	void start(){
+    void start(){
 		Precentage_text = GetComponent<Text>();
 		Debug.LogError(Precentage_text);
 	}
 
-	void back_to_mainMenu()
-	    {
-	       SceneManager.LoadScene("MainMenu");
-	    }
+    void back_to_mainMenu()
+    {
+        optionMenu.enabled = false;
+        startMenu.enabled = true;
+    }
 
-	public void text_update(float value)
+    public void text_update(float value)
 	    {
 		
 	       Precentage_text.text = Mathf.RoundToInt(value * 100) + "%";
 	    }
+
+
 }
