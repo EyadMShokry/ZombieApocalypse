@@ -17,6 +17,7 @@ TagManager:
   - zombieGirl
   - zombiePolice
   - zombieCop
+  - Antizin
   layers:
   - Default
   - TransparentFX
