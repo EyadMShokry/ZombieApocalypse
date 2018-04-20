@@ -14,7 +14,7 @@ public class DifficulityControlScript : MonoBehaviour
 	private static float startBatLevelAmount = 15.00f;
 	private static float degradingIntensityAmount = 1.00f;
 	private static float degradingBatteryLevelAmount = 1.00f;
-	// time in seconds.
+	// Time in seconds.
 	private static float degradeAfterTime = 5.00f;
 
 	private static float zombieSpeed = 0.5f; // Zombie speed 

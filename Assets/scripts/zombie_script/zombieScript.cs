@@ -6,7 +6,7 @@ using System.Threading;
 
 public class zombieScript : MonoBehaviour
 {
-
+	#region PRIVATE VARIABLES
 	private Transform t_Player;
 	// Finding player
 	//private FirstPersonController m_Player; disabled until fixing the unrealistic behavior of camera shaking effect.
@@ -17,11 +17,14 @@ public class zombieScript : MonoBehaviour
 	// cordinates that if the player die the zombie will wake randomly
 	private float x;
 	private float z;
+	#endregion
 	//sounds
 	public string DeathSound;
 	public string IdleSound;
 	public string AttackSound;
 
+	// Integer that is randomized to either choose to attack or bite.
+	bool RANDOMIZED_STATE_INIT;
 	private void Translate (Vector3 direction){
 		this.transform.rotation = Quaternion.Slerp 
 			(this.transform.rotation, Quaternion.LookRotation (direction), 0.1f);
@@ -53,10 +56,7 @@ public class zombieScript : MonoBehaviour
 		if (UnityStandardAssets.Characters.FirstPerson.FirstPersonController.isplayerDeath == true) {
 			
 			Translate (new Vector3 (x, 0, z));
-			anim.SetBool ("isWalking", true);
-			anim.SetBool ("isAttacking", false);
-			anim.SetBool ("isBiting", false);
-			anim.SetBool ("isIdle", false);
+			SetZombieState ("Walk");
 		
 		} else {	
 			Vector3 direction = CalculateDiffVector();
@@ -64,17 +64,18 @@ public class zombieScript : MonoBehaviour
 
 			direction.y = 0;
 			if (direction.magnitude <= DifficulityControlScript.DistanceMagnitute && angle <= DifficulityControlScript.SeeAngle) {
-				anim.SetBool ("isWalking", true);
-				anim.SetBool ("isAttacking", false);
-				anim.SetBool ("isBiting", false);
-				anim.SetBool ("isIdle", false);
+				SetZombieState ("Walk");
 				Translate (direction);
 				if (anim.GetBool ("isWalking") == true) {
 					if (CalculateDiffVector().magnitude <= 2) {	
-						anim.SetBool ("isWalking", false);
-						anim.SetBool ("isIdle", false);
-						anim.SetBool ("isBiting", false);
-						anim.SetBool ("isAttacking", true);
+
+						// Randomizing State
+						RANDOMIZED_STATE_INIT = randomBoolean();
+						if (RANDOMIZED_STATE_INIT)
+							SetZombieState ("Attack");
+						else 
+							SetZombieState("Bite");
+
 						SoundManagerScript.PlaySound (AttackSound);
 						//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
 						//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
@@ -83,19 +84,13 @@ public class zombieScript : MonoBehaviour
 						// Above function was disabled due to unrealistic behavior (disabled by andrewnagyeb)
 					}
 				} 
-				if (anim.GetBool ("isAttacking") == true || anim.GetBool ("isBiting") == true) {
+				if (anim.GetBool ("isAttacking") == true || anim.GetBool ("isBitting") == true) {
 					if (direction.magnitude > 2) {	
-						anim.SetBool ("isAttacking", false);
-						anim.SetBool ("isBiting", false);
-						anim.SetBool ("isIdle", false);
-						anim.SetBool ("isWalking", true);
+						SetZombieState ("Walk");
 					} 
 				}
 			} else {
-				anim.SetBool ("isAttacking", false);
-				anim.SetBool ("isBiting", false);
-				anim.SetBool ("isWalking", false);
-				anim.SetBool ("isIdle", true);
+				SetZombieState ("Idle");
 				SoundManagerScript.PlaySound (IdleSound);
 			}
 		}
@@ -117,4 +112,45 @@ public class zombieScript : MonoBehaviour
 
 
 	}
+	#region PRIVATE FUNCTIONS
+	/*
+	 * Following function is used to set state
+	 * @param state to be set
+	 */
+
+	private void SetZombieState(string state){
+		switch (state) {
+		case "Attack":
+			anim.SetBool ("isWalking", false);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isBitting", false);
+			anim.SetBool ("isAttacking", true);
+			break;
+		case "Bite":
+			anim.SetBool ("isWalking", false);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isBitting", true);
+			anim.SetBool ("isAttacking", false);
+			break;
+		case "Idle":
+			anim.SetBool ("isWalking", false);
+			anim.SetBool ("isIdle", true);
+			anim.SetBool ("isBitting", false);
+			anim.SetBool ("isAttacking", false);
+			break;
+		case "Walk":
+			anim.SetBool ("isWalking", true);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isBitting", false);
+			anim.SetBool ("isAttacking", false);
+			break;
+		}
+	}
+
+	private bool randomBoolean ()
+	{
+		return (Random.Range(0, 2) == 1); 
+	}
+	#endregion
+
 }
