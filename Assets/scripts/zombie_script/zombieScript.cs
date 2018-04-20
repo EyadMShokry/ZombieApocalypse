@@ -18,6 +18,7 @@ public class zombieScript : MonoBehaviour
 	private float x;
 	private float z;
 	#endregion
+
 	//sounds
 	public string DeathSound;
 	public string IdleSound;
