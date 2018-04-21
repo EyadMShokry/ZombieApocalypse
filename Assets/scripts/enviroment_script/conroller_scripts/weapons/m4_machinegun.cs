@@ -138,10 +138,13 @@ public class m4_machinegun : MonoBehaviour {
 				Destroy (impactGO, 2f);
 			}
 		}
-		if (!SoundManagerScript.audioSrc.isPlaying) 
-		{
-			SoundManagerScript.PlaySound ("magazineEmpty");
+		if(currentMagazineAmmo <= 0){
+			if (!SoundManagerScript.audioSrc.isPlaying) 
+			{
+				SoundManagerScript.PlaySound ("magazineEmpty");
+			}	
 		}
+
 	}
 
 	IEnumerator Reload(){

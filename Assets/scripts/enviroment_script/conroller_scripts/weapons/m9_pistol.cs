@@ -115,6 +115,8 @@ public class m9_pistol : MonoBehaviour {
 		if (currentMagazineAmmo > 0) {
 			WeaponAnimationScript.anim.Play (WeaponAnimationScript.fire.name);
 			SoundManagerScript.PlaySound ("m9Shot");
+			SoundManagerScript.PlaySound ("bulletDropping");
+
 			// Decrease Ammo count
 			currentMagazineAmmo--;
 			// Displaying current ammo count
@@ -145,8 +147,8 @@ public class m9_pistol : MonoBehaviour {
 		isReloading = true;
 		Debug.Log ("Reloading...");
 		WeaponAnimationScript.anim.Play(WeaponAnimationScript.reload.name);
-		yield return new WaitForSeconds(reloadTime);
 		SoundManagerScript.PlaySound ("m9ReloadChangeMagazine");
+		yield return new WaitForSeconds(reloadTime);
 		int AmmoToReload = maxMagazineSize - currentMagazineAmmo;
 		if (AmmoToReload > maxOwnedAmmo) {
 			currentMagazineAmmo += maxOwnedAmmo;

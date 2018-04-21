@@ -38,7 +38,7 @@ public class SoundManagerScript : MonoBehaviour
 		m4ReloadSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m4" + Path.DirectorySeparatorChar + "reload");
 		//m9 pistol sounds
 		m9ShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m9_pistol" + Path.DirectorySeparatorChar + "shot");
-		m9ReloadChangeMagazineSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m9_pistol" + Path.DirectorySeparatorChar + "reload_change_magazine");
+		m9ReloadChangeMagazineSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "m9_pistol" + Path.DirectorySeparatorChar + "change_magazine_reload");
 		//machine gun sounds
 		machineGunReloadSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "machine_gun" + Path.DirectorySeparatorChar + "reload");
 		machineGunShotSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "weapons" + Path.DirectorySeparatorChar + "machine_gun" + Path.DirectorySeparatorChar + "shot");
