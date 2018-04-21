@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
@@ -49,10 +50,7 @@ public class MainMenuController : MonoBehaviour {
     {
         //enable respective panel
         MainOptionsPanel.SetActive(false);
-        StartGameOptionsPanel.SetActive(true);
-
-        //play anim for opening main options panel
-        anim.Play("buttonTweenAnims_on");
+        SceneManager.LoadScene("cityEnvironment");
 
         //play click sfx
         playClickSound();
@@ -108,30 +106,6 @@ public class MainMenuController : MonoBehaviour {
 
     }
 
-    public void openContinue_Load()
-    {
-        //enable respective panel
-        GamePanel.SetActive(false);
-        ControlsPanel.SetActive(false);
-        GfxPanel.SetActive(false);
-        LoadGamePanel.SetActive(true);
-
-        //play anim for opening game options panel
-        anim.Play("OptTweenAnim_on");
-
-        //play click sfx
-        playClickSound();
-
-    }
-
-    public void newGame()
-    {
-        if (!string.IsNullOrEmpty(newGameSceneName))
-            SceneManager.LoadScene(newGameSceneName);
-        else
-            Debug.Log("Please write a scene name in the 'newGameSceneName' field of the Main Menu Script and don't forget to " +
-                "add that scene in the Build Settings!");
-    }
     #endregion
 
     #region Back Buttons
