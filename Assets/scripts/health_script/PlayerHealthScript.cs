@@ -197,34 +197,6 @@ public class PlayerHealthScript : MonoBehaviour
 
 			}
 
-
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-

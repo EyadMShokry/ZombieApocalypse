@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using System.Threading;
+using UnityEngine.AI;
 
 public class zombieScript : MonoBehaviour
 {
 	#region PRIVATE VARIABLES
 	private Transform t_Player;
+
 	// Finding player
 	//private FirstPersonController m_Player; disabled until fixing the unrealistic behavior of camera shaking effect.
 	static Animator anim;
@@ -17,31 +19,40 @@ public class zombieScript : MonoBehaviour
 	// cordinates that if the player die the zombie will wake randomly
 	private float x;
 	private float z;
+
+	// A reference to zombie nav mesh agent
+	private NavMeshAgent zombie;
+
+	// Using this to trigger the zombie awarness state and chasing mode
+	private bool isAware = false;
+
 	#endregion
 
-	//sounds
+	#region PUBLIC VARIABLES
+
+	// sounds
 	public string DeathSound;
 	public string IdleSound;
 	public string AttackSound;
 
+	#endregion
+
 	// Integer that is randomized to either choose to attack or bite.
 	bool RANDOMIZED_STATE_INIT;
-	private void Translate (Vector3 direction){
-		this.transform.rotation = Quaternion.Slerp 
-			(this.transform.rotation, Quaternion.LookRotation (direction), 0.1f);
-		this.transform.Translate (0, 0, DifficulityControlScript.ZombieSpeed*Time.deltaTime);
-	}
 
-	private Vector3 CalculateDiffVector ()
-	{
-		return t_Player.position - this.transform.position;
-	}
+
+	#region MonoBehaviour Functions and Events
+	/*
+	 * Following functions are used for the zombie AI
+	 * @param Zombie AI
+	 */
 
 	void Start ()
 	{
+		zombie = GetComponent<NavMeshAgent> ();
 		x = Random.Range (-28, 26);
 		z = Random.Range (-15, 20);
-		anim = GetComponent<Animator> ();	
+		anim = GetComponent<Animator> ();
 		t_Player = GameObject.Find ("Player").transform;
 		//m_Player = GameObject.FindObjectOfType<FirstPersonController>(); disabled until fixing the unrealistic behavior of camera shaking effect.
 	}
@@ -49,53 +60,33 @@ public class zombieScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		// If the zombie is out of health, play the animation and sound for zombie death
 		if (!health) {
 			anim.SetBool ("isDie", true);
 			SoundManagerScript.PlaySound (DeathSound);
 		}
 
+		// Breaking The chase mode
+		Vector3 direction = CalculateDiffVector();
+		if(direction.magnitude >= 10){
+			UnTriggerAwareState ();
+		}
+
+		// If the player is dead, make the zombie walk randomly
 		if (UnityStandardAssets.Characters.FirstPerson.FirstPersonController.isplayerDeath == true) {
-			
 			Translate (new Vector3 (x, 0, z));
 			SetZombieState ("Walk");
-		
-		} else {	
-			Vector3 direction = CalculateDiffVector();
-			float angle = Vector3.Angle (direction, this.transform.forward);
-
-			direction.y = 0;
-			if (direction.magnitude <= DifficulityControlScript.DistanceMagnitute && angle <= DifficulityControlScript.SeeAngle) {
-				SetZombieState ("Walk");
-				Translate (direction);
-				if (anim.GetBool ("isWalking") == true) {
-					if (CalculateDiffVector().magnitude <= 2) {	
-
-						// Randomizing State
-						RANDOMIZED_STATE_INIT = randomBoolean();
-						if (RANDOMIZED_STATE_INIT)
-							SetZombieState ("Attack");
-						else 
-							SetZombieState("Bite");
-
-						SoundManagerScript.PlaySound (AttackSound);
-						//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
-						//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
-
-						// TODO
-						// Above function was disabled due to unrealistic behavior (disabled by andrewnagyeb)
-					}
-				} 
-				if (anim.GetBool ("isAttacking") == true || anim.GetBool ("isBitting") == true) {
-					if (direction.magnitude > 2) {	
-						SetZombieState ("Walk");
-					} 
-				}
+		} else {
+			if (isAware) {
+				// Our zombie chasing logic
+				//zombie.SetDestination(t_Player.position);
+				ChasePlayer ();
 			} else {
-				SetZombieState ("Idle");
-				SoundManagerScript.PlaySound (IdleSound);
+				SearchForPlayer ();
 			}
 		}
 	}
+
 	void OnTriggerEnter(MeshFilter other)
 	{
 
@@ -113,6 +104,92 @@ public class zombieScript : MonoBehaviour
 
 
 	}
+
+	#endregion
+
+	#region Custome made Functions
+	/*
+	 * Following function is used to set state
+	 * @param state to be set
+	 */
+
+	private void Translate (Vector3 direction){
+		// The last parameter of Quaternion.Slerp is multiplied by Time.deltaTime because,
+		// someone could run the game at 100fps while someone else could run the game at 50fps so the slerp will be faster for the person that can run the game at 100fps
+		this.transform.rotation = Quaternion.Slerp 
+			(this.transform.rotation, Quaternion.LookRotation (direction),DifficulityControlScript.RotationSpeed * Time.deltaTime);
+		this.transform.Translate (0, 0, DifficulityControlScript.ZombieSpeed*Time.deltaTime);
+	}
+
+	private Vector3 CalculateDiffVector ()
+	{
+		return t_Player.position - this.transform.position;
+	}
+
+	private void SearchForPlayer(){
+		// Setting zombie idle animation and sound
+		SetZombieState ("Idle");
+		SoundManagerScript.PlaySound (IdleSound);
+
+		/* The Following section is responsible for the line of sight concept for the zombie */
+
+		// This lines is responsible for measuring the angle between the player and the zombie
+		// InverseTransformPoint: This transform the player position from zero global scope (this means that the zero point of the player could be anywhere) to a local scope (this means that the zombie will be the zero point)
+		// We also divide by two to check only 60 degree in the right or left direction
+		if(Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(t_Player.position)) < DifficulityControlScript.SeeAngle/2f ){
+			if(Vector3.Distance(t_Player.position, transform.position) < DifficulityControlScript.DistanceMagnitute){
+				TriggerAwareState ();
+			}
+		}
+	}
+
+	// Funciton contains zombie chasing logic
+	private void ChasePlayer(){
+		Vector3 direction = CalculateDiffVector();
+		direction.y = 0;
+		SetZombieState ("Running");
+		DifficulityControlScript.ZombieSpeed = 2.0f;
+		DifficulityControlScript.RotationSpeed = 1.0f;
+		Translate (direction);
+		if (anim.GetBool ("isRunning") == true) {
+			if (CalculateDiffVector().magnitude <= 3) {	
+				// Randomizing State
+				RANDOMIZED_STATE_INIT = randomBoolean();
+				SetZombieState ("Attack");
+
+				/*if (RANDOMIZED_STATE_INIT) {
+					SetZombieState ("Attack");
+				} else {
+					SetZombieState("Bite");
+				}*/
+
+				SoundManagerScript.PlaySound (AttackSound);
+				//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
+				//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
+
+				// TODO
+				// Above function was disabled due to unrealistic behavior (disabled by andrewnagyeb)
+			}
+		} 
+		if ((anim.GetBool ("isAttacking") == true || anim.GetBool ("isBitting") == true) && isAware == true) {
+			if (direction.magnitude > 2) {	
+				SetZombieState ("Running");
+			} 
+		}
+	}
+
+	// A fucntion to trigger aware state of zombie
+	public void TriggerAwareState(){
+		isAware = true;
+	}
+
+	// A fucntion to trigger aware state of zombie
+	public void UnTriggerAwareState(){
+		isAware = false;
+	}
+
+	#endregion
+
 	#region PRIVATE FUNCTIONS
 	/*
 	 * Following function is used to set state
@@ -126,24 +203,35 @@ public class zombieScript : MonoBehaviour
 			anim.SetBool ("isIdle", false);
 			anim.SetBool ("isBitting", false);
 			anim.SetBool ("isAttacking", true);
+			anim.SetBool ("isRunning", false);
 			break;
 		case "Bite":
 			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isIdle", false);
 			anim.SetBool ("isBitting", true);
 			anim.SetBool ("isAttacking", false);
+			anim.SetBool ("isRunning", false);
 			break;
 		case "Idle":
 			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isIdle", true);
 			anim.SetBool ("isBitting", false);
 			anim.SetBool ("isAttacking", false);
+			anim.SetBool ("isRunning", false);
 			break;
 		case "Walk":
 			anim.SetBool ("isWalking", true);
 			anim.SetBool ("isIdle", false);
 			anim.SetBool ("isBitting", false);
 			anim.SetBool ("isAttacking", false);
+			anim.SetBool ("isRunning", false);
+			break;
+		case "Running":
+			anim.SetBool ("isWalking", false);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isBitting", false);
+			anim.SetBool ("isAttacking", false);
+			anim.SetBool ("isRunning", true);
 			break;
 		}
 	}
