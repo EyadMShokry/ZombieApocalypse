@@ -169,7 +169,7 @@ public class zombieScript : MonoBehaviour
 					m_Player.BlockReleaseInput(true);
 				}
 
-				//SoundManagerScript.PlaySound (AttackSound);
+				SoundManagerScript.PlaySound (AttackSound);
 				//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
 				//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
 
