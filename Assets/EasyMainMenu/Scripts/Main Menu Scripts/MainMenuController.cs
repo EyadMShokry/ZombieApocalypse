@@ -50,7 +50,7 @@ public class MainMenuController : MonoBehaviour {
     {
         //enable respective panel
         MainOptionsPanel.SetActive(false);
-        SceneManager.LoadScene("cityEnvironment");
+        SceneManager.LoadScene("enviroment");
 
         //play click sfx
         playClickSound();
