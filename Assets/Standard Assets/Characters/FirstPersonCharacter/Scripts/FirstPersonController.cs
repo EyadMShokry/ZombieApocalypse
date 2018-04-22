@@ -68,8 +68,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			shaking_Camera = false;
 			blocked_input = false;
 		}
-
-		//added by andrewnagyeb
+		#region DEVELOPED FUNCTIONS
+		//added by developer @andrewnagyeb
 		public void ShakePlayer (float duration, float shaking_power, float shaking_slow_down_amount)
 		{
 			if (duration > 0.00f) {
@@ -82,6 +82,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 				}
 			} 
 		}
+
+		/*
+		 * Function to either block player's keyboard input or release it.
+		 * @paranm bool state.
+		 */
+
+		public void BlockReleaseInput(bool state){
+			this.blocked_input = state;
+		}
+		#endregion
 		// Update is called once per frame
 		private void Update ()
 		{
@@ -118,7 +128,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
 		private void FixedUpdate ()
 		{
-			if (!isplayerDeath) {
+			if (!isplayerDeath && !blocked_input) {
 				float speed;
 				GetInput (out speed);
 				// always move along the camera forward as it is the direction that it being aimed at

@@ -11,7 +11,7 @@ public class zombieScript : MonoBehaviour
 	private Transform t_Player;
 
 	// Finding player
-	//private FirstPersonController m_Player; disabled until fixing the unrealistic behavior of camera shaking effect.
+	private FirstPersonController m_Player;
 	static Animator anim;
 	private bool health = true;
 	// Use this for initialization
@@ -19,7 +19,7 @@ public class zombieScript : MonoBehaviour
 	// cordinates that if the player die the zombie will wake randomly
 	private float x;
 	private float z;
-
+	private int graspingKeysCount = 0;
 	// A reference to zombie nav mesh agent
 	private NavMeshAgent zombie;
 
@@ -54,7 +54,7 @@ public class zombieScript : MonoBehaviour
 		z = Random.Range (-15, 20);
 		anim = GetComponent<Animator> ();
 		t_Player = GameObject.Find ("Player").transform;
-		//m_Player = GameObject.FindObjectOfType<FirstPersonController>(); disabled until fixing the unrealistic behavior of camera shaking effect.
+		m_Player = GameObject.FindObjectOfType<FirstPersonController>(); // Initializing the player object in order to use some of its method.
 	}
 	
 	// Update is called once per frame
@@ -84,6 +84,18 @@ public class zombieScript : MonoBehaviour
 			} else {
 				SearchForPlayer ();
 			}
+		}
+		if (GetCurrentState () == "isBitting") {
+			if (Input.GetKeyDown (KeyCode.G)) {
+				graspingKeysCount += 1;
+			if (graspingKeysCount >= 20) {
+				SetZombieState ("GraspOut");
+				m_Player.BlockReleaseInput(false);
+			}
+			} 
+			Debug.Log (graspingKeysCount);
+			//TODO
+			// Add the bar which outputs the progress state the player want to achieve in order to grasp out from the biting animation.
 		}
 	}
 
@@ -152,16 +164,16 @@ public class zombieScript : MonoBehaviour
 		DifficulityControlScript.RotationSpeed = 1.0f;
 		Translate (direction);
 		if (anim.GetBool ("isRunning") == true) {
-			if (CalculateDiffVector().magnitude <= 3) {	
+			if (CalculateDiffVector().magnitude <= 5) {	
 				// Randomizing State
-				RANDOMIZED_STATE_INIT = randomBoolean();
-				SetZombieState ("Attack");
+				RANDOMIZED_STATE_INIT = false;/*randomBoolean();*/
 
-				/*if (RANDOMIZED_STATE_INIT) {
+				if (RANDOMIZED_STATE_INIT) {
 					SetZombieState ("Attack");
 				} else {
 					SetZombieState("Bite");
-				}*/
+					m_Player.BlockReleaseInput(true);
+				}
 
 				SoundManagerScript.PlaySound (AttackSound);
 				//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
@@ -199,25 +211,32 @@ public class zombieScript : MonoBehaviour
 	private void SetZombieState(string state){
 		switch (state) {
 		case "Attack":
+			anim.SetBool ("isAttacking", true);
 			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isIdle", false);
 			anim.SetBool ("isBitting", false);
-			anim.SetBool ("isAttacking", true);
 			anim.SetBool ("isRunning", false);
+			anim.SetBool ("isGraspedOut", false);
+
 			break;
 		case "Bite":
+			anim.SetBool ("isBitting", true);
 			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isIdle", false);
-			anim.SetBool ("isBitting", true);
 			anim.SetBool ("isAttacking", false);
 			anim.SetBool ("isRunning", false);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isGraspedOut", false);
+
 			break;
 		case "Idle":
-			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isIdle", true);
+			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isBitting", false);
 			anim.SetBool ("isAttacking", false);
 			anim.SetBool ("isRunning", false);
+			anim.SetBool ("isGraspedOut", false);
+
 			break;
 		case "Walk":
 			anim.SetBool ("isWalking", true);
@@ -225,8 +244,20 @@ public class zombieScript : MonoBehaviour
 			anim.SetBool ("isBitting", false);
 			anim.SetBool ("isAttacking", false);
 			anim.SetBool ("isRunning", false);
+			anim.SetBool ("isGraspedOut", false);
+
 			break;
 		case "Running":
+			anim.SetBool ("isRunning", true);
+			anim.SetBool ("isWalking", false);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isBitting", false);
+			anim.SetBool ("isAttacking", false);
+			anim.SetBool ("isGraspedOut", false);
+
+			break;
+		case "GraspOut":
+			anim.SetBool ("isGraspedOut", true);
 			anim.SetBool ("isWalking", false);
 			anim.SetBool ("isIdle", false);
 			anim.SetBool ("isBitting", false);
@@ -239,6 +270,19 @@ public class zombieScript : MonoBehaviour
 	private bool randomBoolean ()
 	{
 		return (Random.Range(0, 2) == 1); 
+	}
+	private string GetCurrentState(){
+		if (anim.GetBool ("isBitting"))
+			return "isBitting";
+		if (anim.GetBool ("isWalking"))
+			return "isWalking";
+		if (anim.GetBool ("isIdle"))
+			return "isIdle";
+		if (anim.GetBool ("isAttacking"))
+			return "isAttacking";
+		if (anim.GetBool ("isRunning"))
+			return "isRunning";
+		return "";
 	}
 	#endregion
 

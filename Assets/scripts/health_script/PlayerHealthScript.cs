@@ -86,23 +86,23 @@ public class PlayerHealthScript : MonoBehaviour
 			currentHealth -= damage;
 			if (currentHealth > 10)
 			{
-				if (!SoundManagerScript.audioSrc.isPlaying)
+				/*if (!SoundManagerScript.audioSrc.isPlaying)
 				{
 					SoundManagerScript.PlaySound ("characterHurt");
-				}
+				}*/
 			}
 
 			if (currentHealth <= 10 && currentHealth != 0)
 			{
-				if (!SoundManagerScript.audioSrc.isPlaying) 
+				/*if (!SoundManagerScript.audioSrc.isPlaying) 
 				{
 					SoundManagerScript.PlaySound ("characterHurt");
 					SoundManagerScript.PlaySound ("characterHeavyBreathing");
-				}
+				}*/
 			}
 			if (currentHealth == 0)
 			{
-				SoundManagerScript.PlaySound("characterDeath");
+				//SoundManagerScript.PlaySound("characterDeath");
 			}
 
 
@@ -154,7 +154,7 @@ public class PlayerHealthScript : MonoBehaviour
 		}
 		if (other.gameObject.CompareTag("zombieGirl"))
 		{
-			TakeDamage((int)Math.Ceiling(Time.deltaTime/1500));
+			TakeDamage(0 /*(int)Math.Ceiling(Time.deltaTime/1500)*/);
 		}
 		if (other.gameObject.CompareTag("zombiePolice"))
 		{
