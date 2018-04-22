@@ -19,7 +19,7 @@ public class zombieScript : MonoBehaviour
 	// cordinates that if the player die the zombie will wake randomly
 	private float x;
 	private float z;
-
+	private int graspingKeysCount = 0;
 	// A reference to zombie nav mesh agent
 	private NavMeshAgent zombie;
 
@@ -85,9 +85,15 @@ public class zombieScript : MonoBehaviour
 				SearchForPlayer ();
 			}
 		}
-		if (AmIChasing () == "isBitting") {
-			if (Input.GetKeyDown (KeyCode.G))
-				Debug.Log ("Grasping Out");
+		if (GetCurrentState () == "isBitting") {
+			if (Input.GetKeyDown (KeyCode.G)) {
+				graspingKeysCount += 1;
+			if (graspingKeysCount >= 20) {
+				SetZombieState ("GraspOut");
+				m_Player.BlockReleaseInput(false);
+			}
+			} 
+			Debug.Log (graspingKeysCount);
 			//TODO
 			// Add the bar which outputs the progress state the player want to achieve in order to grasp out from the biting animation.
 		}
@@ -160,7 +166,7 @@ public class zombieScript : MonoBehaviour
 		if (anim.GetBool ("isRunning") == true) {
 			if (CalculateDiffVector().magnitude <= 5) {	
 				// Randomizing State
-				RANDOMIZED_STATE_INIT = true;/*randomBoolean();*/
+				RANDOMIZED_STATE_INIT = false;/*randomBoolean();*/
 
 				if (RANDOMIZED_STATE_INIT) {
 					SetZombieState ("Attack");
@@ -265,7 +271,7 @@ public class zombieScript : MonoBehaviour
 	{
 		return (Random.Range(0, 2) == 1); 
 	}
-	private string AmIChasing(){
+	private string GetCurrentState(){
 		if (anim.GetBool ("isBitting"))
 			return "isBitting";
 		if (anim.GetBool ("isWalking"))
