@@ -56,7 +56,7 @@ public class zombieScript : MonoBehaviour
 		t_Player = GameObject.Find ("Player").transform;
 		m_Player = GameObject.FindObjectOfType<FirstPersonController>(); // Initializing the player object in order to use some of its method.
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -77,7 +77,7 @@ public class zombieScript : MonoBehaviour
 			Translate (new Vector3 (x, 0, z));
 			SetZombieState ("Walk");
 		} else {
-			if (isAware) {
+			if (isAware && (GetCurrentState () != "isBitting" && GetCurrentState () != "isAttacking")) {
 				// Our zombie chasing logic
 				//zombie.SetDestination(t_Player.position);
 				ChasePlayer ();
@@ -88,10 +88,10 @@ public class zombieScript : MonoBehaviour
 		if (GetCurrentState () == "isBitting") {
 			if (Input.GetKeyDown (KeyCode.G)) {
 				graspingKeysCount += 1;
-			if (graspingKeysCount >= 20) {
-				SetZombieState ("GraspOut");
-				m_Player.BlockReleaseInput(false);
-			}
+				if (graspingKeysCount >= 20) {
+					SetZombieState ("GraspOut");
+					m_Player.BlockReleaseInput(false);
+				}
 			} 
 			Debug.Log (graspingKeysCount);
 			//TODO
@@ -162,29 +162,35 @@ public class zombieScript : MonoBehaviour
 		SetZombieState ("Running");
 		DifficulityControlScript.ZombieSpeed = 2.0f;
 		DifficulityControlScript.RotationSpeed = 1.0f;
-		Translate (direction);
-		if (anim.GetBool ("isRunning") == true) {
-			if (CalculateDiffVector().magnitude <= 5) {	
-				// Randomizing State
-				RANDOMIZED_STATE_INIT = false;/*randomBoolean();*/
+		if (CalculateDiffVector ().magnitude >= 2) {
+			Translate (direction);
+		} else {
+			// Break Chase
+			UnTriggerAwareState();
+			// Randomizing State
+			RANDOMIZED_STATE_INIT = true;/*randomBoolean();*/
 
-				if (RANDOMIZED_STATE_INIT) {
-					SetZombieState ("Attack");
-				} else {
-					SetZombieState("Bite");
-					m_Player.BlockReleaseInput(true);
-				}
-
-				SoundManagerScript.PlaySound (AttackSound);
-				//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
-				//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
-
-				// TODO
-				// Above function was disabled due to unrealistic behavior (disabled by andrewnagyeb)
+			if (RANDOMIZED_STATE_INIT) {
+				SetZombieState ("Attack");
+			} else {
+				SetZombieState("Bite");
+				//m_Player.BlockReleaseInput(true);
 			}
-		} 
+
+			SoundManagerScript.PlaySound (AttackSound);
+			//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
+			//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
+
+			// TODO
+			// Above function was disabled due to unrealistic behavior (disabled by andrewnagyeb)
+		}
+		/*if (anim.GetBool ("isRunning") == true) {
+			if (CalculateDiffVector().magnitude <= 2) {
+				
+			}
+		} */
 		if ((anim.GetBool ("isAttacking") == true || anim.GetBool ("isBitting") == true) && isAware == true) {
-			if (direction.magnitude > 2) {	
+			if (direction.magnitude > 2) {
 				SetZombieState ("Running");
 			} 
 		}
@@ -280,6 +286,7 @@ public class zombieScript : MonoBehaviour
 	{
 		return (Random.Range(0, 2) == 1); 
 	}
+
 	private string GetCurrentState(){
 		if (anim.GetBool ("isBitting"))
 			return "isBitting";
