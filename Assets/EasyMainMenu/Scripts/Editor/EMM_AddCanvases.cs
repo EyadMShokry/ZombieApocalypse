@@ -63,7 +63,7 @@ public class EMM_AddCanvases : EditorWindow{
     public static void AddMainMenuCanvas()
     {
         //instantiate ui canvas
-        GameObject mainMenu = Instantiate(Resources.Load("Prefabs/MainMenu")) as GameObject;
+        GameObject mainMenu = Instantiate(Resources.Load("Prefabs/MainMenu1")) as GameObject;
         //rename it
         mainMenu.name = "Main Menu";
 

@@ -5,8 +5,11 @@ public class Enemy : MonoBehaviour {
 	// health points
 	public float health = 50f;
 
-	// destroyed version of box
-	//public GameObject destroyedVersion;
+	private zombieScript zombieSc;
+
+	public void Start(){
+		zombieSc = gameObject.GetComponent<zombieScript> ();
+	}
 	
 	// Update is called once per frame
 	public void TakeDamage (float amount) {
@@ -19,7 +22,6 @@ public class Enemy : MonoBehaviour {
 
 	// contain details for object to die
 	void Die(){
-		//Instantiate(destroyedVersion, transform.position, transform.rotation);
-		Destroy (gameObject);
+		zombieSc.SetZombieState ("Die");
 	}
 }

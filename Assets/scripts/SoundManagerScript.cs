@@ -66,7 +66,7 @@ public class SoundManagerScript : MonoBehaviour
 		zombiePoliceDeathSound = Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "zombies" + Path.DirectorySeparatorChar + "zombie_police" + Path.DirectorySeparatorChar + "death");
 		//Pick up kits sounds
 		pickUpSound =  Resources.Load<AudioClip> ("sounds" + Path.DirectorySeparatorChar + "kits" + Path.DirectorySeparatorChar + "pickup_kit");
-		audioSrc = GetComponent<AudioSource> (); 
+		audioSrc = GetComponent<AudioSource> ();
 	}
 	//Update is called once per frame
 	void Update ()
@@ -102,7 +102,7 @@ public class SoundManagerScript : MonoBehaviour
 			audioSrc.PlayOneShot (m4MultiShotsSound);
 			break;
 		case "m4OneShot":
-			audioSrc.PlayOneShot (m4OneShotSound);
+			//audioSrc.PlayOneShot (m4OneShotSound);
 			break;
 		case "m4Reload":
 			audioSrc.PlayOneShot (m4ReloadSound);
@@ -114,19 +114,19 @@ public class SoundManagerScript : MonoBehaviour
 			audioSrc.PlayOneShot (m9ReloadChangeMagazineSound);
 			break;
 		case "machineGunReload":
-			audioSrc.PlayOneShot (machineGunReloadSound);
+			//audioSrc.PlayOneShot (machineGunReloadSound);
 			break;
 		case "machineGunShot":
 			audioSrc.PlayOneShot (machineGunShotSound);
 			break;
 		case "weaponsSwitching":
-			audioSrc.PlayOneShot (weaponsSwitchingSound);
+			//audioSrc.PlayOneShot (weaponsSwitchingSound);
 			break;
 		case "magazineEmpty":
 			audioSrc.PlayOneShot (magazineEmptySound);
 			break;
 		case "bulletDropping":
-			audioSrc.PlayOneShot (bulletDroppingSound);
+			//audioSrc.PlayOneShot (bulletDroppingSound);
 			break;
 		case "startingMusic":
 			audioSrc.PlayOneShot (startingMusicSound);

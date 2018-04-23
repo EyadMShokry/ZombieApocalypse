@@ -208,7 +208,7 @@ public class zombieScript : MonoBehaviour
 	 * @param state to be set
 	 */
 
-	private void SetZombieState(string state){
+	public void SetZombieState(string state){
 		switch (state) {
 		case "Attack":
 			anim.SetBool ("isAttacking", true);
@@ -263,6 +263,15 @@ public class zombieScript : MonoBehaviour
 			anim.SetBool ("isBitting", false);
 			anim.SetBool ("isAttacking", false);
 			anim.SetBool ("isRunning", true);
+			break;
+		case "Die":
+			anim.SetBool ("isGraspedOut", false);
+			anim.SetBool ("isWalking", false);
+			anim.SetBool ("isIdle", false);
+			anim.SetBool ("isBitting", false);
+			anim.SetBool ("isAttacking", false);
+			anim.SetBool ("isRunning", false);
+			anim.SetBool ("isDie", true);
 			break;
 		}
 	}

@@ -126,11 +126,15 @@ public class m4_machinegun : MonoBehaviour {
 			Ray ray = new Ray (fpscam.transform.position, fpscam.transform.forward);
 			if (Physics.Raycast (ray, out hit, range)) {
 				if (hit.collider.CompareTag ("zombieGirl") || hit.collider.CompareTag ("zombieCop") || hit.collider.CompareTag ("zombiePolice")) {
-					/*Enemy enemy = hit.collider.GetComponent<Enemy> ();
-					enemy.TakeDamage (damage);*/
-					if (hit.rigidbody != null) {
-						hit.rigidbody.AddForce (-hit.normal * impactForce);
+					Enemy enemy = hit.collider.GetComponent<Enemy> ();
+					if (hit.collider is BoxCollider){
+						Debug.Log ("Box collider has been hit");
 					}
+					Debug.Log (GetType(hit.collider));
+					enemy.TakeDamage (damage);
+					/*if (hit.rigidbody != null) {
+						hit.rigidbody.AddForce (-hit.normal * impactForce);
+					}*/
 					GameObject bloodGO = Instantiate (bloodEffect, hit.point, Quaternion.LookRotation (hit.normal));
 					Destroy (bloodGO, 2f);
 				}
