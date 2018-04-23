@@ -7,6 +7,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PauseMenu : MonoBehaviour {
 
+    Animator anim;
+   
     public static bool GameIsPaused = false ;
 
     public GameObject pauseMenu;
@@ -15,6 +17,7 @@ public class PauseMenu : MonoBehaviour {
     private void Start()
     {
         optionMenu.enabled = false;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,6 +41,7 @@ public class PauseMenu : MonoBehaviour {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+
    }
 
     void Pause()
@@ -51,5 +55,7 @@ public class PauseMenu : MonoBehaviour {
     {
         pauseMenu.SetActive(false);
         optionMenu.enabled=true;
+
+        anim.Play("buttonTweenAnims_on");
     }
 }

@@ -10,6 +10,8 @@ public class QuitMenu_in_pauseMenu : MonoBehaviour {
     public Button resumeText;
     public Button quitText;
 
+    Animator anim;
+
     // Use this for initialization
     void Start () {
         quitMenu = quitMenu.GetComponent<Canvas>();
@@ -17,13 +19,16 @@ public class QuitMenu_in_pauseMenu : MonoBehaviour {
         quitText = quitText.GetComponent<Button>();
         resumeText = resumeText.GetComponent<Button>();
         quitMenu.enabled = false;
-	}
+        anim = GetComponent<Animator>();
+    }
 
     public void ExitPress()  //the button quit
     {
         quitMenu.enabled = true;
         resumeText.enabled = false;
         quitText.enabled = false;
+
+        anim.Play("buttonTweenAnims_on");
     }
 
     public void NoPress()  //the button No
