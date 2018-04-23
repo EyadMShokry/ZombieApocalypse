@@ -130,7 +130,6 @@ public class m4_machinegun : MonoBehaviour {
 					if (hit.collider is BoxCollider){
 						Debug.Log ("Box collider has been hit");
 					}
-					Debug.Log (GetType(hit.collider));
 					enemy.TakeDamage (damage);
 					/*if (hit.rigidbody != null) {
 						hit.rigidbody.AddForce (-hit.normal * impactForce);
