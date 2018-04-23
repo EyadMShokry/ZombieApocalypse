@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
 
@@ -33,7 +32,7 @@ public class MainMenuController : MonoBehaviour {
     {
         //enable respective panel
         MainOptionsPanel.SetActive(true);
-        StartGameOptionsPanel.SetActive(false);
+        //StartGameOptionsPanel.SetActive(false);
 
         //play anim for opening main options panel
         anim.Play("buttonTweenAnims_on");
@@ -49,7 +48,6 @@ public class MainMenuController : MonoBehaviour {
     public void openStartGameOptions()
     {
         //enable respective panel
-        MainOptionsPanel.SetActive(false);
         SceneManager.LoadScene("enviroment");
 
         //play click sfx
