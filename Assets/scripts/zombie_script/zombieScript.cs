@@ -9,7 +9,8 @@ public class zombieScript : MonoBehaviour
 {
 	#region PRIVATE VARIABLES
 	private Transform t_Player;
-
+	// Integer that is randomized to either choose to attack or bite.
+	private bool RANDOMIZED_STATE_INIT;
 	// Finding player
 	private FirstPersonController m_Player;
 	static Animator anim;
@@ -36,10 +37,6 @@ public class zombieScript : MonoBehaviour
 	public string AttackSound;
 
 	#endregion
-
-	// Integer that is randomized to either choose to attack or bite.
-	bool RANDOMIZED_STATE_INIT;
-
 
 	#region MonoBehaviour Functions and Events
 	/*
@@ -97,6 +94,10 @@ public class zombieScript : MonoBehaviour
 			//TODO
 			// Add the bar which outputs the progress state the player want to achieve in order to grasp out from the biting animation.
 		}
+
+		if (GetCurrentState () == "isGraspedOut") {
+			ChasePlayer ();
+		}
 	}
 
 	void OnTriggerEnter(MeshFilter other)
@@ -121,8 +122,8 @@ public class zombieScript : MonoBehaviour
 
 	#region Custome made Functions
 	/*
-	 * Following function is used to set state
-	 * @param state to be set
+	 * Following function is used to translate zombie's position.
+	 * @param direction of the translated objcet.
 	 */
 
 	private void Translate (Vector3 direction){
@@ -174,7 +175,11 @@ public class zombieScript : MonoBehaviour
 				SetZombieState ("Attack");
 			} else {
 				SetZombieState("Bite");
+				//m_Player.PlayAnimation ("bite_first_move", 0f);
+				//m_Player.PlayAnimation ("camera_shaking", 1f);
 				//m_Player.BlockReleaseInput(true);
+				//TODO
+				// Make the bite first move animation play only once.
 			}
 
 			SoundManagerScript.PlaySound (AttackSound);
@@ -298,6 +303,8 @@ public class zombieScript : MonoBehaviour
 			return "isAttacking";
 		if (anim.GetBool ("isRunning"))
 			return "isRunning";
+		if (anim.GetBool ("isGraspedOut"))
+			return "isGraspedOut";
 		return "";
 	}
 	#endregion

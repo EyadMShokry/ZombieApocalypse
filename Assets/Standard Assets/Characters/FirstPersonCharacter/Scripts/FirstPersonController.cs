@@ -3,12 +3,15 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
+using System.Collections;
+
 namespace UnityStandardAssets.Characters.FirstPerson
 {
 	[RequireComponent (typeof(CharacterController))]
 	[RequireComponent (typeof(AudioSource))]
 	public class FirstPersonController : MonoBehaviour
 	{
+		#region PRIVATE VARIABLES | MADE BY ASSET DEVELOPER
 		[SerializeField] private bool m_IsWalking;
 		[SerializeField] private float m_WalkSpeed;
 		[SerializeField] private float m_RunSpeed;
@@ -29,14 +32,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		// the sound played when character leaves the ground.
 		[SerializeField] private AudioClip m_LandSound;
 		// the sound played when character touches back on ground.
-
-		private Camera m_Camera;
-		// added by andrewnagyeb, camera transformer to shake it.
-		private Transform t_Camera;
-		// added by andrewnagyeb, camera shaking bool value that describes if the camera is already being shaked.
-		private bool shaking_Camera;
-		// added by andrewnagyeb, value that illustrates whether user's input is currently blocked.
-		private bool blocked_input;
 		private bool m_Jump;
 		private float m_YRotation;
 		private Vector2 m_Input;
@@ -49,9 +44,54 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private float m_NextStep;
 		private bool m_Jumping;
 		private AudioSource m_AudioSource;
-		public static bool isplayerDeath=false;
-
+		#endregion
+		#region PRIVATE VARIABLES | MADE BY GAME DEVELOPERS
+		private Camera m_Camera;
+		// added by andrewnagyeb, camera transformer to shake it.
+		private Transform t_Camera;
+		// added by andrewnagyeb, camera shaking bool value that describes if the camera is already being shaked.
+		private bool shaking_Camera;
+		// added by andrewnagyeb, value that illustrates whether user's input is currently blocked.
+		private bool blocked_input;
+		#endregion
 		// Use this for initialization
+		#region PUBLIC VARIABLES | MADE BY GAME DEVELOPERS
+		public static bool isplayerDeath=false;
+		public Animation anim;
+		#endregion
+		#region DEVELOPED FUNCTIONS
+		//added by developer @andrewnagyeb
+		public void ShakePlayer (float duration, float shaking_power, float shaking_slow_down_amount)
+		{
+			if (duration > 0.00f) {
+				this.shaking_Camera = !this.shaking_Camera;		
+				if (this.shaking_Camera) {
+					blocked_input = true;
+					this.t_Camera.localPosition = this.m_OriginalCameraPosition + Random.insideUnitSphere * shaking_power;
+					duration -= Time.deltaTime * shaking_slow_down_amount;
+					this.shaking_Camera = false;
+				}
+			} 
+		}
+		
+		/*
+		* Function to either block player's keyboard input or release it.
+		* @paranm bool state.
+		*/
+		
+		public void BlockReleaseInput(bool state){
+			this.blocked_input = state;
+		}
+
+		public void PlayAnimation(string AnimationName, float delay){
+			StartCoroutine (PlayAnimationCouroutine(AnimationName, delay));
+		}
+
+		public IEnumerator PlayAnimationCouroutine(string AnimationName, float delay){
+			yield return new WaitForSeconds(delay);
+			anim.Play (AnimationName);
+		}
+		#endregion
 		private void Start ()
 		{
 			m_CharacterController = GetComponent<CharacterController> ();
@@ -68,30 +108,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			shaking_Camera = false;
 			blocked_input = false;
 		}
-		#region DEVELOPED FUNCTIONS
-		//added by developer @andrewnagyeb
-		public void ShakePlayer (float duration, float shaking_power, float shaking_slow_down_amount)
-		{
-			if (duration > 0.00f) {
-				this.shaking_Camera = !this.shaking_Camera;		
-				if (this.shaking_Camera) {
-					blocked_input = true;
-					this.t_Camera.localPosition = this.m_OriginalCameraPosition + Random.insideUnitSphere * shaking_power;
-					duration -= Time.deltaTime * shaking_slow_down_amount;
-					this.shaking_Camera = false;
-				}
-			} 
-		}
-
-		/*
-		 * Function to either block player's keyboard input or release it.
-		 * @paranm bool state.
-		 */
-
-		public void BlockReleaseInput(bool state){
-			this.blocked_input = state;
-		}
-		#endregion
 		// Update is called once per frame
 		private void Update ()
 		{
