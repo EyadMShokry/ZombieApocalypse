@@ -48,7 +48,7 @@ public class MainMenuController : MonoBehaviour {
     public void openStartGameOptions()
     {
         //enable respective panel
-        SceneManager.LoadScene("enviroment");
+        SceneManager.LoadScene("Loader");
 
         //play click sfx
         playClickSound();
