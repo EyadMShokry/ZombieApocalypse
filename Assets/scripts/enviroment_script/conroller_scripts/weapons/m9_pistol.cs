@@ -140,7 +140,8 @@ public class m9_pistol : MonoBehaviour {
 				GameObject impactGO = Instantiate (impactEffect, hit.point, Quaternion.LookRotation (hit.normal));
 				Destroy (impactGO, 2f);
 			}
-		}
+		} else
+			SoundManagerScript.PlaySound ("magazineEmpty");
 	}
 
 	IEnumerator Reload(){

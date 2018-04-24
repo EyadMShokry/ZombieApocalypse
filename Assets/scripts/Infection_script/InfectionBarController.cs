@@ -47,6 +47,7 @@ public class InfectionBarController : MonoBehaviour {
 		updateInfectionBar();
 		if (Input.GetKey(KeyCode.E) && antizinTriggerEntered == true){
 			initialInfectionValue += increaseRate;
+			SoundManagerScript.PlaySound ("PickingUp");
 			if (initialInfectionValue > 100) {
 				initialInfectionValue = 100;
 			}
