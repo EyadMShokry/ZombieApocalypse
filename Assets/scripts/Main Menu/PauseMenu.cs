@@ -6,17 +6,21 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 
 public class PauseMenu : MonoBehaviour {
-
     Animator anim;
    
     public static bool GameIsPaused = false ;
 
-    public GameObject pauseMenu;
-    public GameObject optionMenu;
+    public GameObject pauseMenu;    
+    public GameObject MainOptionsPanel;
+    public GameObject GamePanel;
+    public GameObject ControlsPanel;
+    public GameObject GfxPanel;
+
+    private FirstPersonController m_Player;
 
     private void Start()
     {
-        optionMenu.SetActive(false);
+        MainOptionsPanel.SetActive(false);
         anim = GetComponent<Animator>();
     }
 
@@ -33,8 +37,13 @@ public class PauseMenu : MonoBehaviour {
             {
                 Pause();
             }
-        }	
-	}
+        }
+
+        if (Time.timeScale == 0f)
+        {
+            m_Player.BlockReleaseInput(true);
+        }
+    }
 
    public void Resume(){
 
@@ -54,9 +63,8 @@ public class PauseMenu : MonoBehaviour {
     public void option()
     {
         pauseMenu.SetActive(false);
-        optionMenu.SetActive(true);
+        MainOptionsPanel.SetActive(true);
 
-        anim.Play("buttonTweenAnims_on");
     }
 
     public void ExitPress()  //the button quit
@@ -64,11 +72,55 @@ public class PauseMenu : MonoBehaviour {
         Application.Quit();
         Debug.Log("Game is exiting"); //Just to make sure its working
     }
+    public void openOptions_Game()
+    {
+        //enable respective panel
+        GamePanel.SetActive(true);
+        ControlsPanel.SetActive(false);
+        GfxPanel.SetActive(false);
+        MainOptionsPanel.SetActive(false);
 
+    }
+    public void openOptions_Controls()
+    {
+        //enable respective panel
+        GamePanel.SetActive(false);
+        ControlsPanel.SetActive(true);
+        GfxPanel.SetActive(false);
+        MainOptionsPanel.SetActive(false);
+
+    }
+    public void openOptions_Gfx()
+    {
+        //enable respective panel
+        GamePanel.SetActive(false);
+        ControlsPanel.SetActive(false);
+        GfxPanel.SetActive(true);
+        MainOptionsPanel.SetActive(false);
+
+    }
 
     public void back_to_pausemenu()
     {
-        optionMenu.SetActive(false);
+        MainOptionsPanel.SetActive(false);
         pauseMenu.SetActive(true);
+    }
+
+    public void back_options_panels_GameOptions()
+    {
+        GamePanel.SetActive(false);
+        MainOptionsPanel.SetActive(true);
+    }
+
+    public void back_options_panels_controlOptions()
+    {
+        ControlsPanel.SetActive(false);
+        MainOptionsPanel.SetActive(true);
+    }
+
+    public void back_options_panels_GFxOptions()
+    {
+        GfxPanel.SetActive(false);
+        MainOptionsPanel.SetActive(true);
     }
 }

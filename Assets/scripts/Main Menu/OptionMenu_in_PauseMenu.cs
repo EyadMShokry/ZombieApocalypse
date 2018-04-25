@@ -10,11 +10,6 @@ public class OptionMenu_in_PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject optionMenu;
 
-    public void back_to_pausemenu()
-    {
-        optionMenu.SetActive(false);
-        pauseMenu.SetActive(true);
-    }
 
 
 }
