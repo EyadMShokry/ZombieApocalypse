@@ -12,11 +12,11 @@ public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false ;
 
     public GameObject pauseMenu;
-    public Canvas optionMenu;
+    public GameObject optionMenu;
 
     private void Start()
     {
-        optionMenu.enabled = false;
+        optionMenu.SetActive(false);
         anim = GetComponent<Animator>();
     }
 
@@ -54,8 +54,21 @@ public class PauseMenu : MonoBehaviour {
     public void option()
     {
         pauseMenu.SetActive(false);
-        optionMenu.enabled=true;
+        optionMenu.SetActive(true);
 
         anim.Play("buttonTweenAnims_on");
+    }
+
+    public void ExitPress()  //the button quit
+    {
+        Application.Quit();
+        Debug.Log("Game is exiting"); //Just to make sure its working
+    }
+
+
+    public void back_to_pausemenu()
+    {
+        optionMenu.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 }
