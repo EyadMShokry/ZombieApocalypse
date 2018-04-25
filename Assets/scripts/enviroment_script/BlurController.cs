@@ -14,23 +14,18 @@ public class BlurController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (InfectionBarController.initialInfectionValue > 25) {
-			blurEffect.enabled = false;
-		} else
-			blurEffect.enabled = true;
-		/*
-		else {
-			while (InfectionBarController.initialInfectionValue <= 25) {
-				InvokeRepeating("turnBlurOn", 1.0f, 5.0f);
+		if (InfectionBarController.initialInfectionValue > 25)
+			turnBlurOff ();
 
-			}
-		}
-		*/
 	}
-	/*
 	void turnBlurOn()
 	{
 		blurEffect.enabled = true;
 	}
-	*/
+
+	void turnBlurOff()
+	{
+		blurEffect.enabled = false;
+	}
+
 }
