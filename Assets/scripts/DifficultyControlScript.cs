@@ -24,6 +24,8 @@ public class DifficulityControlScript : MonoBehaviour
 	private static float rotationSpeed = 0.5f; // angle between zombie and player determine zombie state
 	private static int zombiesNumber = 5;
 
+	private static int infectionValue = 25;
+
 	public static int ZombiesNumber {
 		get {
 			return zombiesNumber;
@@ -143,5 +145,12 @@ public class DifficulityControlScript : MonoBehaviour
 	}
 	// ---------------------------------
 
-
+	public static int InfectionValue {
+		get {
+			return infectionValue;
+		}
+		set { 
+			infectionValue = value;
+		}
+	}
 }

@@ -13,10 +13,7 @@ public class soundController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Scene scene = SceneManager.GetActiveScene ();
-
 		if (scene.name != "MainMenu")
 			audio.clip.UnloadAudioData ();
-		
-		
 	}
 }
