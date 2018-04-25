@@ -15,7 +15,5 @@ public class soundController : MonoBehaviour {
 		Scene scene = SceneManager.GetActiveScene ();
 		if (scene.name != "MainMenu")
 			audio.clip.UnloadAudioData ();
-		
-		
 	}
 }
