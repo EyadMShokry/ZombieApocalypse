@@ -9,15 +9,23 @@ public class BlurController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (InfectionBarController.initialInfectionValue > 25)
+		if (InfectionBarController.initialInfectionValue > DifficulityControlScript.InfectionValue)
 			turnBlurOff ();
-
+		else if(InfectionBarController.initialInfectionValue <= DifficulityControlScript.InfectionValue)
+			StartCoroutine (SetBlur());
 	}
+
+	IEnumerator SetBlur(){
+		turnBlurOn();
+		yield return new WaitForSeconds(5);
+		turnBlurOff();
+		yield return new WaitForSeconds(10);
+	}
+
 	void turnBlurOn()
 	{
 		blurEffect.enabled = true;
