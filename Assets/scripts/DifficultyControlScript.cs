@@ -43,7 +43,7 @@ public class DifficulityControlScript : MonoBehaviour
 			DegradingIntensityAmount = DegradingIntensityAmount * 0.8f;
 
 			ZombieSpeed = ZombieSpeed * 1.5f;
-			ZombiesNumber = ZombiesNumber * 2.0f;
+			ZombiesNumber = ZombiesNumber * 2;
 			DistanceMagnitute = DistanceMagnitute * 1.5f;
 			break;
 		case "hard":
@@ -56,7 +56,7 @@ public class DifficulityControlScript : MonoBehaviour
 			DegradingIntensityAmount = DegradingIntensityAmount * 0.6f;
 
 			ZombieSpeed = ZombieSpeed * 2.0f;
-			ZombiesNumber = ZombiesNumber * 4.0f;
+			ZombiesNumber = ZombiesNumber * 4;
 			DistanceMagnitute = DistanceMagnitute * 2.5f;
 			break;
 
