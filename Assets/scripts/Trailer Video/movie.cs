@@ -12,8 +12,8 @@ public class movie : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       startmenu.enabled =false;
-        videoPlayer.enabled = true;
+        startmenu.gameObject.SetActive(false);
+        videoPlayer.gameObject.SetActive(true);
         //video.Play();
         //((MovieTexture)GetComponent<Renderer>().material.mainTexture).Play();
 
@@ -28,8 +28,8 @@ public class movie : MonoBehaviour {
         }*/
         if (Input.GetButtonDown("Jump"))
         {
-            videoPlayer.enabled = false;
-            startmenu.enabled = true;
+            videoPlayer.gameObject.SetActive(false);
+            startmenu.gameObject.SetActive(true);
         }
 
 
