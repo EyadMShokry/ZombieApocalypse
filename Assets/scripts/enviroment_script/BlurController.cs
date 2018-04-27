@@ -11,10 +11,10 @@ public class BlurController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (InfectionBarController.initialInfectionValue > DifficulityControlScript.InfectionValue)
+		if (InfectionBarController.initialInfectionValue <= DifficulityControlScript.InfectionValue)
+			StartCoroutine (SetBlur ());
+		else
 			turnBlurOff ();
-		else if(InfectionBarController.initialInfectionValue <= DifficulityControlScript.InfectionValue)
-			StartCoroutine (SetBlur());
 	}
 
 	IEnumerator SetBlur(){
