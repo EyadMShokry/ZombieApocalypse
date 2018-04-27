@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
-
-
 public class BlurController : MonoBehaviour {
 	public Blur blurEffect;
 
@@ -22,8 +20,12 @@ public class BlurController : MonoBehaviour {
 	IEnumerator SetBlur(){
 		turnBlurOn();
 		yield return new WaitForSeconds(5);
+		StartCoroutine(LockBlure ());
+	}
+	IEnumerator LockBlure(){
 		turnBlurOff();
 		yield return new WaitForSeconds(10);
+		StartCoroutine(SetBlur ());
 	}
 
 	void turnBlurOn()
