@@ -18,6 +18,21 @@ TagManager:
   - zombiePolice
   - zombieCop
   - Antizin
+  - floor
+  - ceiling
+  - wall
+  - door
+  - room
+  - bed
+  - tv
+  - cupboard
+  - bath
+  - light
+  - cabels
+  - fireextinguisher
+  - eletroPanel
+  - Trolly
+  - stretcher
   layers:
   - Default
   - TransparentFX
