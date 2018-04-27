@@ -15,7 +15,8 @@ public class PauseMenu : MonoBehaviour {
     public GameObject GamePanel;
     public GameObject ControlsPanel;
     public GameObject GfxPanel;
-
+    public GameObject infectionBar;
+    public GameObject HealthBar;
     private FirstPersonController m_Player;
 
     private void Start()
@@ -43,6 +44,8 @@ public class PauseMenu : MonoBehaviour {
         if (Time.timeScale == 0f)
         {
             m_Player.BlockReleaseInput(true);
+            infectionBar.SetActive(false);
+            HealthBar.SetActive(false);
         }
     }
 
@@ -51,7 +54,8 @@ public class PauseMenu : MonoBehaviour {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-
+        infectionBar.SetActive(true);
+        HealthBar.SetActive(true);
    }
 
     void Pause()
