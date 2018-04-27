@@ -3093,6 +3093,8 @@ MonoBehaviour:
   GamePanel: {fileID: 631685929}
   ControlsPanel: {fileID: 1590234898}
   GfxPanel: {fileID: 808705820}
+  infectionBar: {fileID: 1618341070}
+  HealthBar: {fileID: 502484122}
 --- !u!114 &111338221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8780,6 +8782,10 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: ec89eaad22bce364eabcdae8f401ca41, type: 3}
+--- !u!1 &502484122 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 119886, guid: 34017cf12560c804bb2f669f00c7af91, type: 2}
+  m_PrefabInternal: {fileID: 2085963642}
 --- !u!1 &515126856
 GameObject:
   m_ObjectHideFlags: 0
@@ -25628,7 +25634,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 111338220}
         m_MethodName: ExitPress
         m_Mode: 1
         m_Arguments:

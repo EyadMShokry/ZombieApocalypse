@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 
 public class PauseMenu : MonoBehaviour {
@@ -15,7 +16,8 @@ public class PauseMenu : MonoBehaviour {
     public GameObject GamePanel;
     public GameObject ControlsPanel;
     public GameObject GfxPanel;
-
+    public GameObject infectionBar;
+    public GameObject HealthBar;
     private FirstPersonController m_Player;
 
     private void Start()
@@ -43,6 +45,8 @@ public class PauseMenu : MonoBehaviour {
         if (Time.timeScale == 0f)
         {
             m_Player.BlockReleaseInput(true);
+            infectionBar.SetActive(false);
+            HealthBar.SetActive(false);
         }
     }
 
@@ -51,7 +55,8 @@ public class PauseMenu : MonoBehaviour {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-
+        infectionBar.SetActive(true);
+        HealthBar.SetActive(true);
    }
 
     void Pause()
@@ -61,7 +66,7 @@ public class PauseMenu : MonoBehaviour {
         GameIsPaused = true;
     }
 
-    public void option()
+    public void option() //open option menu
     {
         pauseMenu.SetActive(false);
         MainOptionsPanel.SetActive(true);
@@ -70,10 +75,9 @@ public class PauseMenu : MonoBehaviour {
 
     public void ExitPress()  //the button quit
     {
-        Application.Quit();
-        Debug.Log("Game is exiting"); //Just to make sure its working
+        SceneManager.LoadScene("MainMenu");
     }
-    public void openOptions_Game()
+    public void openOptions_Game() 
     {
         //enable respective panel
         GamePanel.SetActive(true);
