@@ -34,30 +34,30 @@ public class DifficulityControlScript : MonoBehaviour
 			//Do Nothing
 			break;
 		case "medium":
-			CameraShakingPower = CameraShakingPower * 1.1f;
-			CameraShakingDuration = CameraShakingDuration * 1.1f;
-			CameraShakingSlowDownAmount = CameraShakingSlowDownAmount * 1.1f;
+			CameraShakingPower = 7.7f;
+			CameraShakingDuration =  1.1f;
+			CameraShakingSlowDownAmount =  1.1f;
 
-			StartBatteryLevelAmount = StartBatteryLevelAmount * 0.8f;
-			DegradingBatteryLevelAmount = DegradingBatteryLevelAmount * 0.8f;
-			DegradingIntensityAmount = DegradingIntensityAmount * 0.8f;
+			StartBatteryLevelAmount = 12.0f;
+			DegradingBatteryLevelAmount = 0.8f;
+			DegradingIntensityAmount = 0.8f;
 
-			ZombieSpeed = ZombieSpeed * 1.5f;
-			ZombiesNumber = ZombiesNumber * 2;
-			DistanceMagnitute = DistanceMagnitute * 1.5f;
+			ZombieSpeed =  0.3f;
+			ZombiesNumber = 6;
+			DistanceMagnitute = 15.0f;
 			break;
 		case "hard":
-			CameraShakingPower = CameraShakingPower * 1.3f;
-			CameraShakingDuration = CameraShakingDuration * 1.3f;
-			CameraShakingSlowDownAmount = CameraShakingSlowDownAmount * 1.3f;
+			CameraShakingPower = 8.5f;
+			CameraShakingDuration = 1.3f;
+			CameraShakingSlowDownAmount = 1.3f;
 
-			StartBatteryLevelAmount = StartBatteryLevelAmount * 0.6f;
-			DegradingBatteryLevelAmount = DegradingBatteryLevelAmount * 0.6f;
-			DegradingIntensityAmount = DegradingIntensityAmount * 0.6f;
+			StartBatteryLevelAmount = 9.0f;
+			DegradingBatteryLevelAmount = 0.6f;
+			DegradingIntensityAmount = 0.6f;
 
-			ZombieSpeed = ZombieSpeed * 2.0f;
-			ZombiesNumber = ZombiesNumber * 4;
-			DistanceMagnitute = DistanceMagnitute * 2.5f;
+			ZombieSpeed = 0.4f;
+			ZombiesNumber = 8;
+			DistanceMagnitute = 25.0f;
 			break;
 
 		}
