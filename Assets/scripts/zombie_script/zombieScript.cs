@@ -100,24 +100,6 @@ public class zombieScript : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter(MeshFilter other)
-	{
-
-
-		if (other.GetComponent<MeshFilter> ().name == "Wall") {
-
-			transform.Rotate(0, 180,0);
-
-			transform.Translate(Vector3.forward * 1*Time.deltaTime);
-
-			//Destroy (gameObject);
-
-
-		}
-
-
-	}
-
 	#endregion
 
 	#region Custome made Functions

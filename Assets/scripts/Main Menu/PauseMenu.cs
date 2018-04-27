@@ -22,6 +22,7 @@ public class PauseMenu : MonoBehaviour {
     {
         MainOptionsPanel.SetActive(false);
         anim = GetComponent<Animator>();
+		m_Player = GameObject.FindObjectOfType<FirstPersonController>(); // Initializing the player object in order to use some of its method.
     }
 
     // Update is called once per frame
