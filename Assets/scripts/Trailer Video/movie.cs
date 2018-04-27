@@ -1,29 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class movie : MonoBehaviour {
 
     public Canvas startmenu;
     public Canvas videoPlayer;
 
-   //private MovieTexture video;
+  // public VideoPlayer video;
 
     // Use this for initialization
     void Start () {
-        startmenu.enabled =false;
+       startmenu.enabled =false;
+        videoPlayer.enabled = true;
+        //video.Play();
         //((MovieTexture)GetComponent<Renderer>().material.mainTexture).Play();
-		
-	}
+
+    }
 
     // Update is called once per frame
     void Update () {
-            
-       /* if ( video.isPlaying== false) {
+      /*      
+       if ( video.time== 25f) {
             videoPlayer.enabled = false;
             startmenu.enabled = true;
         }*/
-           
-		
-	}
+        if (Input.GetButtonDown("Jump"))
+        {
+            videoPlayer.enabled = false;
+            startmenu.enabled = true;
+        }
+
+
+    }
 }
