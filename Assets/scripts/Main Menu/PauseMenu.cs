@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
+using UnityEngine.SceneManagement;
 
 
 public class PauseMenu : MonoBehaviour {
@@ -65,7 +66,7 @@ public class PauseMenu : MonoBehaviour {
         GameIsPaused = true;
     }
 
-    public void option()
+    public void option() //open option menu
     {
         pauseMenu.SetActive(false);
         MainOptionsPanel.SetActive(true);
@@ -74,10 +75,9 @@ public class PauseMenu : MonoBehaviour {
 
     public void ExitPress()  //the button quit
     {
-        Application.Quit();
-        Debug.Log("Game is exiting"); //Just to make sure its working
+        SceneManager.LoadScene("MainMenu");
     }
-    public void openOptions_Game()
+    public void openOptions_Game() 
     {
         //enable respective panel
         GamePanel.SetActive(true);
