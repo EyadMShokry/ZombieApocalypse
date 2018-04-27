@@ -173,6 +173,7 @@ public class zombieScript : MonoBehaviour
 
 			if (RANDOMIZED_STATE_INIT) {
 				SetZombieState ("Attack");
+				SoundManagerScript.PlaySound (AttackSound);
 			} else {
 				SetZombieState("Bite");
 				//m_Player.PlayAnimation ("bite_first_move", 0f);
@@ -182,7 +183,7 @@ public class zombieScript : MonoBehaviour
 				// Make the bite first move animation play only once.
 			}
 
-			SoundManagerScript.PlaySound (AttackSound);
+
 			//m_Player.ShakePlayer (/* Duration*/ DifficulityControlScript.CameraShakingDuration, /*Shaking Power*/ 
 			//DifficulityControlScript.CameraShakingPower, /*Slow down amount*/ DifficulityControlScript.CameraShakingSlowDownAmount);
 
