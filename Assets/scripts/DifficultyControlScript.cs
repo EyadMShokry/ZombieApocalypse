@@ -26,6 +26,43 @@ public class DifficulityControlScript : MonoBehaviour
 
 	private static int infectionValue = 25;
 
+	public static void DiffMode(string mode) // Function that change the mode of game in [Easy, Medium, Hard]
+	{
+		mode = mode.ToLower ();
+		switch (mode) {
+		case "easy":
+			//Do Nothing
+			break;
+		case "medium":
+			CameraShakingPower = CameraShakingPower * 1.1f;
+			CameraShakingDuration = CameraShakingDuration * 1.1f;
+			CameraShakingSlowDownAmount = CameraShakingSlowDownAmount * 1.1f;
+
+			StartBatteryLevelAmount = StartBatteryLevelAmount * 0.8f;
+			DegradingBatteryLevelAmount = DegradingBatteryLevelAmount * 0.8f;
+			DegradingIntensityAmount = DegradingIntensityAmount * 0.8f;
+
+			ZombieSpeed = ZombieSpeed * 1.5f;
+			ZombiesNumber = ZombiesNumber * 2;
+			DistanceMagnitute = DistanceMagnitute * 1.5f;
+			break;
+		case "hard":
+			CameraShakingPower = CameraShakingPower * 1.3f;
+			CameraShakingDuration = CameraShakingDuration * 1.3f;
+			CameraShakingSlowDownAmount = CameraShakingSlowDownAmount * 1.3f;
+
+			StartBatteryLevelAmount = StartBatteryLevelAmount * 0.6f;
+			DegradingBatteryLevelAmount = DegradingBatteryLevelAmount * 0.6f;
+			DegradingIntensityAmount = DegradingIntensityAmount * 0.6f;
+
+			ZombieSpeed = ZombieSpeed * 2.0f;
+			ZombiesNumber = ZombiesNumber * 4;
+			DistanceMagnitute = DistanceMagnitute * 2.5f;
+			break;
+
+		}
+	}
+
 	public static int ZombiesNumber {
 		get {
 			return zombiesNumber;
@@ -35,6 +72,7 @@ public class DifficulityControlScript : MonoBehaviour
 			zombiesNumber = value;
 		}
 	}
+		
 
 	public static float RotationSpeed {
 		get {
