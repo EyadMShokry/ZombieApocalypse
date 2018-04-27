@@ -16,7 +16,7 @@ public class PlayerHealthScript : MonoBehaviour
 	private bool Isdie = false;
 	public Transform[] health;
 	private int number_of_exists_health=0;
-
+	private InfectionBarController inf_bar;
 	private float[] values_distance = {
 		0.1f,
 		0.2f,
@@ -65,6 +65,7 @@ public class PlayerHealthScript : MonoBehaviour
 
 		// Update the Simple Health Bar with the updated values of Health and Shield.
 		healthBar.UpdateBar(currentHealth, maxHealth);
+		inf_bar = GameObject.FindObjectOfType<InfectionBarController> ();
 	}
 
 	public void HealPlayer(int health)
@@ -159,6 +160,12 @@ public class PlayerHealthScript : MonoBehaviour
 		if (other.gameObject.CompareTag("zombiePolice"))
 		{
 			TakeDamage((int)Math.Ceiling(Time.deltaTime/2700));
+		}
+		if (other.gameObject.CompareTag("Syrum"))
+		{
+			other.gameObject.SetActive(false);
+			SoundManagerScript.PlaySound ("PickingUp");
+			Destroy (GameObject.FindGameObjectWithTag("InfBar"));
 		}
 			
 	}
