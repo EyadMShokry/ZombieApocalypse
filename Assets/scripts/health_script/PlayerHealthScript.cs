@@ -9,7 +9,7 @@ public class PlayerHealthScript : MonoBehaviour
 	static PlayerHealthScript instance;
 	public static PlayerHealthScript Instance { get { return instance; } }
 	public int maxHealth = 100;
-	float currentHealth = 100;
+	private float currentHealth = 100;
 	public SimpleHealthBarScript healthBar;
 	public Animation anim;
 	public AnimationClip die;
@@ -81,11 +81,13 @@ public class PlayerHealthScript : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
+		bool isDead = false;
 
-		if (currentHealth > 0)
+		if (currentHealth > 1f)
 		{
 			currentHealth -= damage;
-			if (currentHealth > 10)
+			Debug.Log (currentHealth);
+			if (currentHealth > 25f)
 			{
 				/*if (!SoundManagerScript.audioSrc.isPlaying)
 				{
@@ -93,7 +95,7 @@ public class PlayerHealthScript : MonoBehaviour
 				}*/
 			}
 
-			if (currentHealth <= 10 && currentHealth != 0)
+			if (currentHealth <= 25f)
 			{
 				/*if (!SoundManagerScript.audioSrc.isPlaying) 
 				{
@@ -101,18 +103,19 @@ public class PlayerHealthScript : MonoBehaviour
 					SoundManagerScript.PlaySound ("characterHeavyBreathing");
 				}*/
 			}
-			if (currentHealth == 0)
-			{
-				//SoundManagerScript.PlaySound("characterDeath");
+
+			if(currentHealth <= 0f){
+				isDead = true;
 			}
-
-
 		}
 
-		else
+		if(isDead)
 		{
 			// Set the current health to zero.
-			currentHealth = 0;
+			currentHealth = 0f;
+
+			// Play character death sound
+			//SoundManagerScript.PlaySound("characterDeath");
 
 			// Run the Death function since the player has died.
 			StartCoroutine(Death());
@@ -146,20 +149,6 @@ public class PlayerHealthScript : MonoBehaviour
 			other.gameObject.SetActive(false);
 			HealPlayer(20);
 
-		}
-
-		if (other.gameObject.CompareTag("damageKits"))
-		{
-			other.gameObject.SetActive(false);
-			TakeDamage(10);
-		}
-		if (other.gameObject.CompareTag("zombieGirl"))
-		{
-			TakeDamage(0 /*(int)Math.Ceiling(Time.deltaTime/1500)*/);
-		}
-		if (other.gameObject.CompareTag("zombiePolice"))
-		{
-			TakeDamage((int)Math.Ceiling(Time.deltaTime/2700));
 		}
 		if (other.gameObject.CompareTag("Syrum"))
 		{
@@ -197,7 +186,6 @@ public class PlayerHealthScript : MonoBehaviour
 							}
 							j++;
 						}
-
 					}
 					i++;
 				}
