@@ -22,7 +22,7 @@ public class InfectionBarController : MonoBehaviour {
 	public bool infectionRateincreasingFlag = false;
 	public Collider Antizin;
 	public float timeLeft = 60.0f; // the value of time that the infection bar deacrease when passed
-	public static float initialInfectionValue = 25; // initial value
+	public static float initialInfectionValue = HoldData.PlayerInfect; // initial value
 	private float maxInfectionValue = 100; // maximum value
 	private float decreaseRate = 10; // the rate that the infection bar decreases with (decrease by time)
 	private float increaseRate = 10; // the rate that the infection bar increases with (collectin antizin)
