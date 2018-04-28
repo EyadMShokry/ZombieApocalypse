@@ -15,26 +15,8 @@ public class VisualEffectsScript : MonoBehaviour {
 	void Start () {
 		alpha = 1.0f;
 		fadeDir = -1.0f;
-		fadeSpeed = 0.5f;
+		fadeSpeed = 0.8f;
 		drawDepth = -1000;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	void OnTriggerEnter (Collider other) {
-		if (other.gameObject.CompareTag ("Player")) {
-			enterCollider = true; 
-		}
-	}
-
-	void OnTriggerExit (Collider other){
-		if (other.gameObject.CompareTag ("Player")) {
-			enterCollider = false;
-			alpha = 1.0f;
-		}
 	}
 	
 	void OnGUI() {
@@ -42,10 +24,19 @@ public class VisualEffectsScript : MonoBehaviour {
 		GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, alpha);
 		if (enterCollider == true) {
 			alpha += fadeDir * fadeSpeed * Time.deltaTime;
-			alpha = Mathf.Clamp01(alpha); // 3lshan alpha matb2ash negative
+			alpha = Mathf.Clamp01(alpha); // So ALpha is not negaitve
 			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), myGUITexture);
 		}
 		GUI.depth = drawDepth;
+	}
 
+	public void runBloodEffect(){
+		enterCollider = true; 
+	}
+
+	public IEnumerator disableBloodEffect(){
+		yield return new WaitForSeconds (1);
+		enterCollider = false;
+		alpha = 1.0f;
 	}
 }

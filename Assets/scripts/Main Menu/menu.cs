@@ -53,4 +53,5 @@ public class menu : MonoBehaviour {
         Application.Quit();
         Debug.Log("Game is exiting"); //Just to make sure its working
     }
+
 }

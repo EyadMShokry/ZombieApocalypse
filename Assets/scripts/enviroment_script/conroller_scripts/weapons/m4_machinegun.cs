@@ -112,8 +112,8 @@ public class m4_machinegun : MonoBehaviour {
 	void Shoot(){
 		if(currentMagazineAmmo > 0) {
 			WeaponAnimationScript.anim.Play (WeaponAnimationScript.fire.name);
-			SoundManagerScript.PlaySound ("m4OneShot");
-			SoundManagerScript.PlaySound ("bulletDropping");
+			/*SoundManagerScript.PlaySound ("m4OneShot");
+			SoundManagerScript.PlaySound ("bulletDropping");*/
 			// Decrease Ammo count
 			currentMagazineAmmo--;
 			// Displaying current ammo count
@@ -142,10 +142,10 @@ public class m4_machinegun : MonoBehaviour {
 			}
 		}
 		if(currentMagazineAmmo <= 0){
-			if (!SoundManagerScript.audioSrc.isPlaying) 
+			/*if (!SoundManagerScript.audioSrc.isPlaying) 
 			{
 				SoundManagerScript.PlaySound ("magazineEmpty");
-			}	
+			}*/	
 		}
 
 	}
@@ -154,7 +154,7 @@ public class m4_machinegun : MonoBehaviour {
 		isReloading = true;
 		Debug.Log ("Reloading...");
 		WeaponAnimationScript.anim.Play(WeaponAnimationScript.reload.name);
-		SoundManagerScript.PlaySound ("m4Reload");
+		//SoundManagerScript.PlaySound ("m4Reload");
 		yield return new WaitForSeconds(reloadTime);
 
 		int AmmoToReload = maxMagazineSize - currentMagazineAmmo;

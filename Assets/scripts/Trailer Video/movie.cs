@@ -31,7 +31,20 @@ public class movie : MonoBehaviour {
             videoPlayer.gameObject.SetActive(false);
             startmenu.gameObject.SetActive(true);
         }
+        else
+        {
+            StartCoroutine(skip_when_fineshed());
+        }
 
 
+
+    }
+    IEnumerator skip_when_fineshed()
+    {
+        print(Time.time);
+        yield return new WaitForSeconds(25.0f);
+        print(Time.time);
+        videoPlayer.gameObject.SetActive(false);
+        startmenu.gameObject.SetActive(true);
     }
 }
