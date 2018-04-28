@@ -15,7 +15,7 @@ public class zombieScript : MonoBehaviour
 	private bool RANDOMIZED_SCREAM_INIT;
 	// Finding player
 	private FirstPersonController m_Player;
-	static Animator anim;
+	private Animator anim;
 	private bool health = true;
 	// Use this for initialization
 
@@ -61,7 +61,7 @@ public class zombieScript : MonoBehaviour
 		zombie = GetComponent<NavMeshAgent> ();
 		x = Random.Range (-28, 26);
 		z = Random.Range (-15, 20);
-		anim = GetComponent<Animator> ();
+		anim = gameObject.GetComponent <Animator> ();
 		t_Player = GameObject.Find ("Player").transform;
 		m_Player = GameObject.FindObjectOfType<FirstPersonController>(); // Initializing the player object in order to use some of its method.
 		vsc = gameObject.GetComponent <VisualEffectsScript> ();
@@ -87,16 +87,18 @@ public class zombieScript : MonoBehaviour
 			Translate (new Vector3 (x, 0, z));
 			SetZombieState ("Walk");
 		} else {
-			if (isAware) {
-				// Our zombie chasing logic
-				/*RANDOMIZED_SCREAM_INIT = true;
+			if(GetCurrentState () != "isDead"){
+				if (isAware) {
+					// Our zombie chasing logic
+					/*RANDOMIZED_SCREAM_INIT = true;
 
 				if(RANDOMIZED_SCREAM_INIT){
 					SetZombieState ("Scream");
 				}*/
-				ChasePlayer ();
-			} else if(!isAttacking) {
-				SearchForPlayer ();
+					ChasePlayer ();
+				} else if (!isAttacking) {
+					SearchForPlayer ();
+				}
 			}
 		}
 		/*if (GetCurrentState () == "isBitting") {

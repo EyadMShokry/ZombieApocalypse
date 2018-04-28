@@ -41,6 +41,7 @@ TagManager:
   - mission1
   - mission2
   - mission3
+  - zombieHand
   layers:
   - Default
   - TransparentFX

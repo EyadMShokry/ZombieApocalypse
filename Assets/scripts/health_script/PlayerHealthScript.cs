@@ -58,6 +58,15 @@ public class PlayerHealthScript : MonoBehaviour
 		instance = GetComponent<PlayerHealthScript>();
 	}
 
+
+	void OnCollisionEnter (Collision col)
+	{
+		if(col.gameObject.CompareTag ("zombieHand"))
+		{
+			Debug.Log ("Zombie hitted me! :(");
+		}
+	}
+
 	void Start()
 	{
 		// Set the current health and shield to max values.
