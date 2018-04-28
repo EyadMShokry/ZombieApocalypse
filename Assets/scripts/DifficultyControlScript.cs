@@ -26,6 +26,15 @@ public class DifficulityControlScript : MonoBehaviour
 
 	private static int infectionValue = 25;
 
+	public static int number_of_instanse_health_Small=5;
+	public static int number_of_instanse_health_Mid = 4;
+	public static int number_of_instanse_health_Large = 3;
+	public static int number_of_instanse_Ammo_9m = 5;
+	public static int number_of_instanse_Ammo_4m = 5;
+	public static int number_of_instanse_Zombie_Cop = 20;
+	public static int number_of_instanse_Zombie_Girl=20;
+	public static int number_of_instanse_health_Police=20;
+
 	public static void DiffMode(string mode) // Function that change the mode of game in [Easy, Medium, Hard]
 	{
 		mode = mode.ToLower ();
