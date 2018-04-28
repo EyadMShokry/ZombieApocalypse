@@ -9,7 +9,7 @@ public class PlayerHealthScript : MonoBehaviour
 	static PlayerHealthScript instance;
 	public static PlayerHealthScript Instance { get { return instance; } }
 	public int maxHealth = 100;
-	private float currentHealth = 100;
+	private float currentHealth = HoldData.PlayerHealth;
 	public SimpleHealthBarScript healthBar;
 	public Animation anim;
 	public AnimationClip die;
