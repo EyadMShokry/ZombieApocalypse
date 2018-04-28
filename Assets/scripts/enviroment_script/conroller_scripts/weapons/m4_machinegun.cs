@@ -127,6 +127,7 @@ public class m4_machinegun : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, range)) {
 				if (hit.collider.CompareTag ("zombieGirl") || hit.collider.CompareTag ("zombieCop") || hit.collider.CompareTag ("zombiePolice")) {
 					Enemy enemy = hit.collider.GetComponent<Enemy> ();
+					Debug.Log (enemy);
 					if (hit.collider is BoxCollider){
 						Debug.Log ("Box collider has been hit");
 					}
