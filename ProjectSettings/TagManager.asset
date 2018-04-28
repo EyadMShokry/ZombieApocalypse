@@ -35,6 +35,8 @@ TagManager:
   - stretcher
   - Syrum
   - InfBar
+  - VerticalBattery
+  - HorizontalBattery
   layers:
   - Default
   - TransparentFX
