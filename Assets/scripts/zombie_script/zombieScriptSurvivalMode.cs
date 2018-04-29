@@ -35,6 +35,9 @@ public class zombieScriptSurvivalMode : MonoBehaviour
 	// visual effects script
 	private VisualEffectsScript vsc;
 
+	// Enemy Manager
+	private EnemyManager em;
+
 	#endregion
 
 	#region MonoBehaviour Functions and Events
@@ -52,6 +55,7 @@ public class zombieScriptSurvivalMode : MonoBehaviour
 		anim = gameObject.GetComponent <Animator> ();
 		t_Player = GameObject.Find ("Player").transform;
 		vsc = gameObject.GetComponent <VisualEffectsScript> ();
+		em = GameObject.Find ("EnemyManager").GetComponent <EnemyManager> ();
 	}
 
 	// Update is called once per frame
@@ -60,6 +64,7 @@ public class zombieScriptSurvivalMode : MonoBehaviour
 		// If the zombie is out of health, play the animation and sound for zombie death
 		if (!health) {
 			anim.SetBool ("isDie", true);
+			em.destroyZombie ();
 		}
 
 		// If the player is dead, make the zombie walk randomly

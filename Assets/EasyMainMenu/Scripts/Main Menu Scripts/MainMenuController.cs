@@ -26,7 +26,11 @@ public class MainMenuController : MonoBehaviour {
         PlayerPrefs.SetInt("quickSaveSlot", quickSaveSlotID);
     }
 	public void start_survival_mode(){
-		SceneManager.LoadScene ("Arena");
+		SceneManager.LoadScene ("Loader");
+	}
+
+	public void Start_Desert_environment(){
+		SceneManager.LoadScene ("Desert");
 	}
 
     #region Open Different panels

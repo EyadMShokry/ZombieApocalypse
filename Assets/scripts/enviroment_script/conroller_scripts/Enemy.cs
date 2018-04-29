@@ -16,12 +16,13 @@ public class Enemy : MonoBehaviour {
 		health -= amount;
 		Debug.Log (health);
 		if (health <= 0f) {
-			Die ();	
+			Die ();
 		}
 	}
 
 	// contain details for object to die
 	void Die(){
+		Debug.Log ("Die");
 		zombieSc.SetZombieState ("Die");
 	}
 }

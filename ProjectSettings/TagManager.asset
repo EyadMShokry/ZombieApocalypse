@@ -42,6 +42,8 @@ TagManager:
   - mission2
   - mission3
   - zombieHand
+  - Fire
+  - EnemyManager
   layers:
   - Default
   - TransparentFX
