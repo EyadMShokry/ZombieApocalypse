@@ -14,6 +14,9 @@ public class ChangeSoundVolume : MonoBehaviour {
 	void Start () {
 		
 	}
+	void Awake(){
+		DontDestroyOnLoad (MusicSlider);
+	}
 	
 	// Update is called once per frame
 	void Update () {
