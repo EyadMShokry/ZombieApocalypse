@@ -31,6 +31,10 @@ public class menu : MonoBehaviour {
         quitText.enabled = false;
     }
 
+	public void Start_Survival_mode(){
+		SceneManager.LoadScene("Arena");
+	}
+
     public void NoPress()
     {
         quitMenu.enabled = false;
