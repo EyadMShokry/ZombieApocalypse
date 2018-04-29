@@ -146,7 +146,6 @@ public class m9_pistol : MonoBehaviour {
 
 	IEnumerator Reload(){
 		isReloading = true;
-		Debug.Log ("Reloading...");
 		WeaponAnimationScript.anim.Play(WeaponAnimationScript.reload.name);
 		SoundManagerScript.PlaySound ("m9ReloadChangeMagazine");
 		yield return new WaitForSeconds(reloadTime);

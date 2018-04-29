@@ -41,15 +41,6 @@ public class zombieScript : MonoBehaviour
 
 	#endregion
 
-	#region PUBLIC VARIABLES
-
-	// sounds
-	public string DeathSound;
-	public string IdleSound;
-	public string AttackSound;
-
-	#endregion
-
 	#region MonoBehaviour Functions and Events
 	/*
 	 * Following functions are used for the zombie AI
@@ -73,7 +64,6 @@ public class zombieScript : MonoBehaviour
 		// If the zombie is out of health, play the animation and sound for zombie death
 		if (!health) {
 			anim.SetBool ("isDie", true);
-			SoundManagerScript.PlaySound (DeathSound);
 		}
 
 		// Breaking The chase mode
@@ -144,7 +134,6 @@ public class zombieScript : MonoBehaviour
 	private void SearchForPlayer(){
 		// Setting zombie idle animation and sound
 		SetZombieState ("Idle");
-		SoundManagerScript.PlaySound (IdleSound);
 
 		/* The Following section is responsible for the line of sight concept for the zombie */
 
@@ -178,7 +167,6 @@ public class zombieScript : MonoBehaviour
 
 			if (RANDOMIZED_STATE_INIT) {
 				SetZombieState ("Attack");
-				SoundManagerScript.PlaySound (AttackSound);
 			} else if(GetCurrentState() != "isBitting") {
 				SetZombieState("Bite");
 				//m_Player.PlayAnimation ("bite_first_move", 1f);

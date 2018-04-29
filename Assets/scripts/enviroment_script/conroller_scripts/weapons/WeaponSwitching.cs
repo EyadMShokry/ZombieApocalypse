@@ -17,55 +17,55 @@ public class WeaponSwitching : MonoBehaviour {
 			if(Input.GetAxis("Mouse ScrollWheel") > 0f){
 				if (selectedWeapon >= transform.childCount - 1) {
 					selectedWeapon = 0;
-					/*if (!SoundManagerScript.audioSrc.isPlaying) 
+					if (!SoundManagerScript.audioSrc.isPlaying) 
 					{
 						SoundManagerScript.PlaySound ("weaponsSwitching");
-					}*/
+					}
 				} else {
 					selectedWeapon++;
-					/*if (!SoundManagerScript.audioSrc.isPlaying) 
+					if (!SoundManagerScript.audioSrc.isPlaying) 
 					{
 						SoundManagerScript.PlaySound ("weaponsSwitching");
-					}*/
+					}
 				}
 			}
 			if(Input.GetAxis("Mouse ScrollWheel") < 0f){
 				if (selectedWeapon <= 0) {
 					selectedWeapon = transform.childCount - 1;
-					/*if (!SoundManagerScript.audioSrc.isPlaying) 
+					if (!SoundManagerScript.audioSrc.isPlaying) 
 					{
 						SoundManagerScript.PlaySound ("weaponsSwitching");
-					}*/
+					}
 
 				} else {
 					selectedWeapon--;
-					/*if (!SoundManagerScript.audioSrc.isPlaying) 
+					if (!SoundManagerScript.audioSrc.isPlaying) 
 					{
 						SoundManagerScript.PlaySound ("weaponsSwitching");
-					}*/
+					}
 
 				}
 			}
 			if(Input.GetKeyDown(KeyCode.Alpha1)){
 				selectedWeapon = 0;
-				/*if (!SoundManagerScript.audioSrc.isPlaying) 
+				if (!SoundManagerScript.audioSrc.isPlaying) 
 				{
 					SoundManagerScript.PlaySound ("weaponsSwitching");
-				}*/
+				}
 			}
 			if(Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2){
 				selectedWeapon = 1;
-				/*if (!SoundManagerScript.audioSrc.isPlaying) 
+				if (!SoundManagerScript.audioSrc.isPlaying) 
 				{
 					SoundManagerScript.PlaySound ("weaponsSwitching");
-				}*/
+				}
 			}
 			if(Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3){
 				selectedWeapon = 2;
-				/*if (!SoundManagerScript.audioSrc.isPlaying) 
+				if (!SoundManagerScript.audioSrc.isPlaying) 
 				{
 					SoundManagerScript.PlaySound ("weaponsSwitching");
-				}*/
+				}
 
 			}
 			if(previousSelectedWeapon != selectedWeapon){

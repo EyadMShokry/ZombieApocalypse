@@ -58,15 +58,6 @@ public class PlayerHealthScript : MonoBehaviour
 		instance = GetComponent<PlayerHealthScript>();
 	}
 
-
-	void OnCollisionEnter (Collision col)
-	{
-		if(col.gameObject.CompareTag ("zombieHand"))
-		{
-			Debug.Log ("Zombie hitted me! :(");
-		}
-	}
-
 	void Start()
 	{
 		// Set the current health and shield to max values.
@@ -98,19 +89,19 @@ public class PlayerHealthScript : MonoBehaviour
 			Debug.Log (currentHealth);
 			if (currentHealth > 25f)
 			{
-				/*if (!SoundManagerScript.audioSrc.isPlaying)
+				if (!SoundManagerScript.audioSrc.isPlaying)
 				{
 					SoundManagerScript.PlaySound ("characterHurt");
-				}*/
+				}
 			}
 
 			if (currentHealth <= 25f)
 			{
-				/*if (!SoundManagerScript.audioSrc.isPlaying) 
+				if (!SoundManagerScript.audioSrc.isPlaying) 
 				{
 					SoundManagerScript.PlaySound ("characterHurt");
 					SoundManagerScript.PlaySound ("characterHeavyBreathing");
-				}*/
+				}
 			}
 
 			if(currentHealth <= 0f){
@@ -124,7 +115,7 @@ public class PlayerHealthScript : MonoBehaviour
 			currentHealth = 0f;
 
 			// Play character death sound
-			//SoundManagerScript.PlaySound("characterDeath");
+			SoundManagerScript.PlaySound("characterDeath");
 
 			// Run the Death function since the player has died.
 			StartCoroutine(Death());

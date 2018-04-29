@@ -110,6 +110,7 @@ public class m4_machinegun : MonoBehaviour {
 	}
 
 	void Shoot(){
+		Debug.Log ("Shooting");
 		if(currentMagazineAmmo > 0) {
 			WeaponAnimationScript.anim.Play (WeaponAnimationScript.fire.name);
 			SoundManagerScript.PlaySound ("m4OneShot");
@@ -127,14 +128,7 @@ public class m4_machinegun : MonoBehaviour {
 			if (Physics.Raycast (ray, out hit, range)) {
 				if (hit.collider.CompareTag ("zombieGirl") || hit.collider.CompareTag ("zombieCop") || hit.collider.CompareTag ("zombiePolice")) {
 					Enemy enemy = hit.collider.GetComponent<Enemy> ();
-					Debug.Log (enemy);
-					if (hit.collider is BoxCollider){
-						Debug.Log ("Box collider has been hit");
-					}
 					enemy.TakeDamage (damage);
-					/*if (hit.rigidbody != null) {
-						hit.rigidbody.AddForce (-hit.normal * impactForce);
-					}*/
 					GameObject bloodGO = Instantiate (bloodEffect, hit.point, Quaternion.LookRotation (hit.normal));
 					Destroy (bloodGO, 2f);
 				}
@@ -143,17 +137,16 @@ public class m4_machinegun : MonoBehaviour {
 			}
 		}
 		if(currentMagazineAmmo <= 0){
-			/*if (!SoundManagerScript.audioSrc.isPlaying) 
+			if (!SoundManagerScript.audioSrc.isPlaying) 
 			{
 				SoundManagerScript.PlaySound ("magazineEmpty");
-			}*/	
+			}
 		}
 
 	}
 
 	IEnumerator Reload(){
 		isReloading = true;
-		Debug.Log ("Reloading...");
 		WeaponAnimationScript.anim.Play(WeaponAnimationScript.reload.name);
 		SoundManagerScript.PlaySound ("m4Reload");
 		yield return new WaitForSeconds(reloadTime);

@@ -32,7 +32,7 @@ public class menu : MonoBehaviour {
     }
 
 	public void Start_Survival_mode(){
-		SceneManager.LoadScene("Arena");
+		SceneManager.LoadScene("Desert");
 	}
 
     public void NoPress()
