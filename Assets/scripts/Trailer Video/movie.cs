@@ -47,7 +47,7 @@ public class movie : MonoBehaviour {
     IEnumerator skip_when_fineshed()
     {
         print(Time.time);
-        yield return new WaitForSeconds(25.0f);
+        yield return new WaitForSeconds(11.0f);
         print(Time.time);
         //videoPlayer.enabled = false;
         //startmenu.enabled = true;
